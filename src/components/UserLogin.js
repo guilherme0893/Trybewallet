@@ -7,6 +7,7 @@ class UserLogin extends Component {
     this.state = {
       email: '',
       password: '',
+      login: false,
     };
   }
 
@@ -17,10 +18,29 @@ class UserLogin extends Component {
     });
   };
 
+  validateEmailAndPassword = () => {
+    const { email, password } = this.state;
+    const passwordInputControl = 6;
+    if (email.includes('@')
+    && email.includes('.com') && password.length >= passwordInputControl) {
+      return true;
+    }
+    return false;
+  }
+
+  onButtonClick = (event) => {
+    event.preventDefault();
+    // const { login } = this.state;
+    this.setState({
+      login: true,
+    });
+  }
+
   render() {
     const {
       email,
       password,
+      // login,
     } = this.state;
 
     return (
@@ -42,6 +62,8 @@ class UserLogin extends Component {
         </form>
         <button
           type="submit"
+          disabled={ this.validateEmailAndPassword }
+          onClick={ this.onButtonClick }
         >
           Entrar
         </button>

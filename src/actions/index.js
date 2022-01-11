@@ -1,7 +1,7 @@
 // Coloque aqui suas actions
 export const ADD_USER = 'ADD_USER';
 
-export const addUser = (email) => ({
+export const addUserAct = (email) => ({
   type: ADD_USER,
   email,
 });

@@ -1,6 +1,11 @@
 // Coloque aqui suas actions
+import getCurrencies from '../services/currencyAPI';
+
 export const ADD_USER = 'ADD_USER';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const REQUEST_API = 'REQUEST_API';
+export const GET_CURRENCIES_SUCESS = 'GET_CURRENCIES_SUCESS';
+export const GET_CURRENCIES_FAIL = 'GET_CURRENCIES_FAIL';
 
 export const addUserAct = (email) => ({
   type: ADD_USER,
@@ -11,3 +16,23 @@ export const addExpenseValueAct = (spentValue) => ({
   type: ADD_EXPENSE,
   spentValue,
 });
+
+export const requestCurrencyApi = () => ({
+  type: REQUEST_API,
+});
+
+const getCurrenciesSuccess = (currencies) => ({
+  type: GET_CURRENCIES_SUCESS,
+  currencies,
+});
+
+const getCurrenciesFail = () => ({
+  type: GET_CURRENCIES_FAIL,
+});
+
+export const getCurrencyThunk = () => (dispatch) => {
+  dispatch(requestCurrencyApi());
+  getCurrencies()
+    .then((currencies) => dispatch(getCurrenciesSuccess(currencies)))
+    .catch(() => dispatch(getCurrenciesFail()));
+};

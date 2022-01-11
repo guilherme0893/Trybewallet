@@ -28,6 +28,13 @@ class ExpensesForm extends Component {
 
   // handleAddValue() {
   //   addExpenseValueAct
+  // this.setState({
+  //   value: 0,
+  //   description: '',
+  //   currency: 'defaultSelect',
+  //   paymentMethod: 'defaultSelect',
+  //   tag: 'defaultSelect',
+  // })
   // }
 
   render() {

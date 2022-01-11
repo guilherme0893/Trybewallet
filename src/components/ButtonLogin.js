@@ -11,7 +11,7 @@ class ButtonLogin extends Component {
     return (
       <button
         type="button"
-        disable={ isButtonDisabled }
+        disabled={ isButtonDisabled }
         onClick={ () => {
           addUser(email);
           history.push('/carteira');

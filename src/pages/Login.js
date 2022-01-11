@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import ButtonLogin from '../components/ButtonLogin';
 import UserLogin from '../components/UserLogin';
 
@@ -13,11 +13,11 @@ class Login extends React.Component {
       isButtonDisabled: true,
     };
 
-    this.onInputChangeEmail = this.onInputChange.bind(this);
-    this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
+    // this.onInputChange = this.onInputChange.bind(this);
+    // this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
   }
 
-  onInputChange(event) {
+  onInputChange = (event) => {
     const { value, id } = event.target;
     this.setState({
       [id]: value,
@@ -29,8 +29,8 @@ class Login extends React.Component {
     // regex compartilhado pelo colega Josué
     const regexValidation = /\S+@\S+.\S+/;
     const passwordInputControl = 6;
-    if (regexValidation.test(email)
-      && passwordInputControl <= password.length) {
+    if (regexValidation.test(email) === true
+      && password.length >= passwordInputControl) {
       this.setState({
         isButtonDisabled: false,
       });
@@ -41,9 +41,8 @@ class Login extends React.Component {
     }
   }
 
-  render() {
-    const { isButtonDisabled, email, password } = this.state;
-    const { history } = this.props;
+  displayInput() {
+    const { email, password } = this.state;
     return (
       <div>
         <UserLogin
@@ -62,11 +61,27 @@ class Login extends React.Component {
           value={ password }
           onInputChange={ this.onInputChange }
         />
-        <ButtonLogin
-          email={ email }
-          disabled={ isButtonDisabled }
-          history={ history }
-        />
+      </div>
+    );
+  }
+
+  displayButton() {
+    const { email, isButtonDisabled } = this.state;
+    const { history } = this.props;
+    return (
+      <ButtonLogin
+        email={ email }
+        isButtonDisabled={ isButtonDisabled }
+        history={ history }
+      />
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        { this.displayInput() }
+        { this.displayButton() }
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonLogin from '../components/ButtonLogin';
-import UserLogin from '../components/UserLogin';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { addUser } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,85 +11,88 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      isButtonDisabled: true,
+      isUserLogged: false,
     };
 
-    // this.onInputChange = this.onInputChange.bind(this);
-    // this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+    this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
   }
 
-  onInputChange = (event) => {
-    const { value, id } = event.target;
-    this.setState({
-      [id]: value,
-    }, () => this.validateEmailAndPassword());
+  onInputChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  onLoginButtonClick() {
+    const { email } = this.state;
+    const { addUser } = this.props;
+    addUser(email);
+    this.setState({ isUserLogged: true });
   }
 
   validateEmailAndPassword() {
     const { email, password } = this.state;
-    // regex compartilhado pelo colega Josué
-    const regexValidation = /\S+@\S+.\S+/;
+    // regex para validação
+    // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
+    const validation = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
+    const emailValidation = email.match(validation);
+
     const passwordInputControl = 6;
-    if (regexValidation.test(email) === true
-      && password.length >= passwordInputControl) {
-      this.setState({
-        isButtonDisabled: false,
-      });
-    } else {
-      this.setState({
-        isButtonDisabled: true,
-      });
-    }
-  }
 
-  displayInput() {
-    const { email, password } = this.state;
     return (
-      <div>
-        <UserLogin
-          testId="email-input"
-          placeholder="Digite aqui seu email"
-          type="email"
-          id="email"
-          value={ email }
-          onInputChange={ this.onInputChange }
-        />
-        <UserLogin
-          testId="password-input"
-          placeholder="Digite sua senha aqui"
-          type="password"
-          id="password"
-          value={ password }
-          onInputChange={ this.onInputChange }
-        />
-      </div>
-    );
-  }
-
-  displayButton() {
-    const { email, isButtonDisabled } = this.state;
-    const { history } = this.props;
-    return (
-      <ButtonLogin
-        email={ email }
-        isButtonDisabled={ isButtonDisabled }
-        history={ history }
-      />
+      !emailValidation || password.length < passwordInputControl
     );
   }
 
   render() {
+    const { email, password, isUserLogged } = this.state;
+    const validateEmailAndPassword = this.validateEmailAndPassword();
+
+    if (isUserLogged) return <Redirect to="/carteira" />;
+
     return (
-      <div>
-        { this.displayInput() }
-        { this.displayButton() }
-      </div>
+      <form>
+        <label htmlFor="email">
+          Email
+          <input
+            data-testid="email-input"
+            type="text"
+            name="email"
+            id="email"
+            value={ email }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <label htmlFor="password">
+          Senha
+          <input
+            data-testid="password-input"
+            type="password"
+            name="password"
+            id="password"
+            value={ password }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <button
+          type="button"
+          onClick={ this.onLoginButtonClick }
+          disabled={ validateEmailAndPassword }
+        >
+          Entrar
+        </button>
+      </form>
     );
   }
 }
 
-Login.propTypes = {
-  history: PropTypes.func.isRequired,
-};
+const mapDispatchToProps = (dispatch) => ({
+  addUser: (email) => dispatch(addUser(email)),
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  addUser: PropTypes.func.isRequired,
+};

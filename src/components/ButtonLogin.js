@@ -1,38 +1,28 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-// import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { addUser } from '../actions';
+// import React, { Component } from 'react';
+// import { PropTypes } from 'prop-types';
 
-class ButtonLogin extends Component {
-  render() {
-    const { isButtonDisabled, history, email, addUser } = this.props;
+// class ButtonLogin extends Component {
+//   render() {
+//     const { id, label, dataTestId, onclick, disabled } = this.props;
+//     return (
+//       <input
+//         type="button"
+//         dataTestId={ dataTestId }
+//         // value={}
+//         id={ id }
+//         disabled={ isButtonDisabled }
+//         // onClick={}
+//       />
+//     );
+//   }
+// }
 
-    return (
-      <button
-        type="button"
-        disabled={ isButtonDisabled }
-        onClick={ () => {
-          addUser(email);
-          history.push('/carteira');
-        } }
-      >
-        Entrar
-      </button>
-    );
-  }
-}
+// export default ButtonLogin;
 
-const mapDispatchToProps = (dispatch) => ({
-  addUser: (email) => dispatch(addUser(email)),
-});
-const mapStateToProps = (state) => (state);
-
-ButtonLogin.propTypes = {
-  addUser: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  isButtonDisabled: PropTypes.bool.isRequired,
-  history: PropTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ButtonLogin);
+// ButtonLogin.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   label: PropTypes.string.isRequired,
+//   dataTestId: PropTypes.string.isRequired,
+//   onclick: PropTypes.func.isRequired,
+//   disabled: PropTypes.bool.isRequired,
+// };

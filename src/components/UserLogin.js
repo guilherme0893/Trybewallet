@@ -1,75 +1,33 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+// import { connect } from 'react-redux';
+// import { addUser } from '../actions';
 
 class UserLogin extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      password: '',
-      login: false,
-    };
-  }
-
-  onInputChangeEmail = (event) => {
-    const { value, name } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  validateEmailAndPassword = () => {
-    const { email, password } = this.state;
-    const passwordInputControl = 6;
-    if (email.includes('@')
-    && email.includes('.com') && password.length >= passwordInputControl) {
-      return true;
-    }
-    return false;
-  }
-
-  onButtonClick = (event) => {
-    event.preventDefault();
-    // const { login } = this.state;
-    this.setState({
-      login: true,
-    });
-  }
-
   render() {
-    const {
-      email,
-      password,
-      // login,
-    } = this.state;
-
+    const { testId, type, id, value, placeholder, onInputChange } = this.props;
     return (
       <div>
-        <form>
-          <input
-            data-testid="email-input"
-            type="email"
-            name="email"
-            value={ email }
-            onChange={ this.onInputChangeEmail }
-          />
-          <input
-            data-testid="password-input"
-            type="password"
-            name="password"
-            value={ password }
-          />
-        </form>
-        <button
-          type="submit"
-          disabled={ this.validateEmailAndPassword }
-          onClick={ this.onButtonClick }
-        >
-          Entrar
-        </button>
+        <input
+          data-testId={ testId }
+          type={ type }
+          id={ id }
+          value={ value }
+          placeholder={ placeholder }
+          onChange={ (event) => onInputChange(event) }
+        />
       </div>
     );
   }
 }
+
+UserLogin.propTypes = {
+  testId: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};
 
 export default UserLogin;

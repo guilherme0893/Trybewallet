@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { addExpenseValueAct } from '../actions/index';
+import { connect } from 'react-redux';
+// import { addExpenseValueAct } from '../actions/index';
 
 class ExpensesForm extends Component {
   constructor() {
@@ -39,13 +40,11 @@ class ExpensesForm extends Component {
 
   render() {
     const {
-
       value,
       description,
       currency,
       paymentMethod,
       tag,
-
     } = this.state;
 
     return (
@@ -146,4 +145,8 @@ class ExpensesForm extends Component {
   }
 }
 
-export default ExpensesForm;
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+export default connect(mapStateToProps, null)(ExpensesForm);

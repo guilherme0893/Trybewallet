@@ -21,18 +21,19 @@ export const requestCurrencyApi = () => ({
   type: REQUEST_API,
 });
 
-const getCurrenciesSuccess = (currencies) => ({
+const getCurrenciesSuccess = (currency) => ({
   type: GET_CURRENCIES_SUCESS,
-  currencies,
+  currency,
 });
 
-const getCurrenciesFail = () => ({
+const getCurrenciesFail = (error) => ({
   type: GET_CURRENCIES_FAIL,
+  error,
 });
 
 export const getCurrencyThunk = () => (dispatch) => {
   dispatch(requestCurrencyApi());
-  getCurrencies()
+  return getCurrencies()
     .then((currencies) => dispatch(getCurrenciesSuccess(currencies)))
-    .catch(() => dispatch(getCurrenciesFail()));
+    .catch((error) => dispatch(getCurrenciesFail(error)));
 };

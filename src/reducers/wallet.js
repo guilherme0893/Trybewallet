@@ -14,13 +14,11 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case ADD_EXPENSE:
-    return { ...state, expenses: [action.expenses] };
-  // {
-  //   const expense = [...state.expenses, action.expenses]
-  //     .map((expenseValue, id) => ({ id, ...expenseValue }));
-  //   return { ...state, expense };
-  // }
+  case ADD_EXPENSE: {
+    const expenses = [...state.expenses, action.expenses]
+      .map((expenseValue, id) => ({ id, ...expenseValue }));
+    return { ...state, expenses };
+  }
   case REQUEST_API:
     return { ...state };
   case GET_CURRENCIES_SUCCESS: {

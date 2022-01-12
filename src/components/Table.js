@@ -6,6 +6,7 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     console.log(expenses);
+    console.log('sou as expenses');
     return (
       <div>
         {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}

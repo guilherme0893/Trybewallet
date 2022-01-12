@@ -6,7 +6,7 @@ class Header extends Component {
   // constructor(props) {
   //   super(props);
 
-  //   // this.getTotalValue = this.getTotalValue.bind(this);
+  //   this.getTotalValue = this.getTotalValue.bind(this);
   // }
 
   // getTotalValue() {

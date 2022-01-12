@@ -4,7 +4,7 @@ import getCurrencies from '../services/currencyAPI';
 export const ADD_USER = 'ADD_USER';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REQUEST_API = 'REQUEST_API';
-export const GET_CURRENCIES_SUCESS = 'GET_CURRENCIES_SUCESS';
+export const GET_CURRENCIES_SUCCESS = 'GET_CURRENCIES_SUCESS';
 export const GET_CURRENCIES_FAIL = 'GET_CURRENCIES_FAIL';
 
 export const addUserAct = (email) => ({
@@ -12,18 +12,18 @@ export const addUserAct = (email) => ({
   email,
 });
 
-export const addExpenseValueAct = (expense) => ({
+export const addExpenseValueAct = (expenses) => ({
   type: ADD_EXPENSE,
-  expense,
+  expenses,
 });
 
 export const requestCurrencyApi = () => ({
   type: REQUEST_API,
 });
 
-const getCurrenciesSuccess = (currency) => ({
-  type: GET_CURRENCIES_SUCESS,
-  currency,
+const getCurrenciesSuccess = (currencies) => ({
+  type: GET_CURRENCIES_SUCCESS,
+  currencies,
 });
 
 const getCurrenciesFail = (error) => ({

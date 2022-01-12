@@ -96,23 +96,6 @@ class ExpensesForm extends Component {
 
     // console.log(currenciesForExchange);
 
-    // const currenciesForExchange = [
-    //   'USD',
-    //   'CAD',
-    //   'EUR',
-    //   'GBP',
-    //   'ARS',
-    //   'BTC',
-    //   'LTC',
-    //   'JPY',
-    //   'CHF',
-    //   'AUD',
-    //   'CNY',
-    //   'ILS',
-    //   'ETH',
-    //   'XRP',
-    // ];
-
     return (
       <div>
         <form>

@@ -15,14 +15,23 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ADD_EXPENSE: {
-    const expenses = [...state.expenses, action.expense];
-    return { ...state, expenses };
+    return {
+      expenses: [...state.expenses, {
+        id: state.expenses.length,
+        value: action.value,
+        description: action.description,
+        currency: action.currency,
+        method: action.method,
+        tag: action.tag,
+        exchangeRates: action.exchangeRates,
+      }],
+    };
   }
-  case REQUEST_API: {
+  case REQUEST_API:
     return { ...state };
-  }
   case GET_CURRENCIES_SUCESS: {
     const { currency } = action;
+    delete currency.USDT;
     return { ...state, currencies: currency };
   }
   case GET_CURRENCIES_FAIL: {

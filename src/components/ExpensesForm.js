@@ -10,7 +10,7 @@ class ExpensesForm extends Component {
     this.state = {
       value: 0,
       description: '',
-      currency: 'defaultSelect',
+      currency: 'USD',
       method: 'defaultSelect',
       tag: 'defaultSelect',
       // o uso do defaultSelect segue o link abaixo
@@ -78,6 +78,8 @@ class ExpensesForm extends Component {
   }
 
   render() {
+    // console.log(this.props);
+
     const {
       value,
       description,

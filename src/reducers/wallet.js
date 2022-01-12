@@ -9,23 +9,24 @@ import {
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  isFetching: false,
   error: '',
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case ADD_EXPENSE:
-    return { ...state };
+  case ADD_EXPENSE: {
+    const expenses = [...state.expenses, action.expense];
+    return { ...state, expenses };
+  }
   case REQUEST_API: {
-    return { ...state, isFetching: true };
+    return { ...state };
   }
   case GET_CURRENCIES_SUCESS: {
     const { currency } = action;
     return { ...state, currencies: currency };
   }
   case GET_CURRENCIES_FAIL: {
-    return { ...state, isFetching: false, error: action.error };
+    return { ...state, error: action.error };
   }
   default:
     return state;

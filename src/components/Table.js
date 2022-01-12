@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 class Table extends Component {
   render() {
-    const { expenses } = this.props;
-    console.log(expenses);
+    // const { expenses } = this.props;
+    // console.log(expenses);
     return (
       <div>
         {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}

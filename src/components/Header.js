@@ -10,9 +10,9 @@ class Header extends Component {
   }
 
   getTotalValue() {
-    const { expenseValues } = this.props;
-    console.log(expenseValues);
-    return expenseValues.reduce((acc, value) => {
+    const { expense } = this.props;
+    // console.log(expense);
+    return expense.reduce((acc, value) => {
       acc += value.value;
       return acc;
     }, 0);
@@ -50,12 +50,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  expenseValues: state.wallet.expenses,
+  expense: state.wallet.expenses,
 });
 
 Header.propTypes = {
-  email: PropTypes.objectOf(PropTypes.string).isRequired,
-  expenseValues: PropTypes.objectOf(PropTypes.number).isRequired,
+  email: PropTypes.string.isRequired,
+  expense: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

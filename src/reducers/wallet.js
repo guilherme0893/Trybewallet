@@ -15,17 +15,9 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ADD_EXPENSE: {
-    return {
-      expenses: [...state.expenses, {
-        id: state.expenses.length,
-        value: action.value,
-        description: action.description,
-        currency: action.currency,
-        method: action.method,
-        tag: action.tag,
-        exchangeRates: action.exchangeRates,
-      }],
-    };
+    const expenses = [...state.expenses, action.expenses]
+      .map((expense, id) => ({ id, ...expense }));
+    return { ...state, expenses };
   }
   case REQUEST_API:
     return { ...state };

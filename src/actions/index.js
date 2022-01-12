@@ -34,6 +34,6 @@ const getCurrenciesFail = (error) => ({
 export const getCurrencyThunk = () => (dispatch) => {
   dispatch(requestCurrencyApi());
   return getCurrencies()
-    .then((currencies) => dispatch(getCurrenciesSuccess(currencies)))
+    .then((data) => dispatch(getCurrenciesSuccess(data)))
     .catch((error) => dispatch(getCurrenciesFail(error)));
 };

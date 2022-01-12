@@ -3,20 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.getTotalValue = this.getTotalValue.bind(this);
-  }
+  //   // this.getTotalValue = this.getTotalValue.bind(this);
+  // }
 
-  getTotalValue() {
-    const { expense } = this.props;
-    // console.log(expense);
-    return expense.reduce((acc, value) => {
-      acc += value.value;
-      return acc;
-    }, 0);
-  }
+  // getTotalValue() {
+  //   const { expense } = this.props;
+  //   // console.log(expense); --> tá vindo vazio !!
+  //   let totalValue = expense.reduce((acc, value) => {
+  //     totalValue = acc + value;
+  //     return totalValue;
+  //   });
+  //   console.log('eu sou o reduce!');
+  // }
 
   render() {
     // const { expenseValues } = this.props;
@@ -36,7 +37,7 @@ class Header extends Component {
           data-testid="total-field"
         >
           Despesa total:
-          { this.getTotalValue() }
+          {/* { this.getTotalValue() } */}
         </h3>
         <h3
           data-testid="header-currency-field"

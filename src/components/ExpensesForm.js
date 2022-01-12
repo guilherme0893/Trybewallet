@@ -32,12 +32,6 @@ class ExpensesForm extends Component {
     fetchCurrenciesApi();
   }
 
-  handleOnInputChange(event) {
-    const { value, name } = event.target;
-    this.setState({
-      [name]: value });
-  }
-
   handleAddValue() {
     // formato das despesas
     // id
@@ -77,6 +71,12 @@ class ExpensesForm extends Component {
     });
   }
 
+  handleOnInputChange(event) {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value });
+  }
+
   render() {
     // console.log(this.props);
 
@@ -88,22 +88,30 @@ class ExpensesForm extends Component {
       tag,
     } = this.state;
 
-    const currenciesForExchange = [
-      'USD',
-      'CAD',
-      'EUR',
-      'GBP',
-      'ARS',
-      'BTC',
-      'LTC',
-      'JPY',
-      'CHF',
-      'AUD',
-      'CNY',
-      'ILS',
-      'ETH',
-      'XRP',
-    ];
+    const { currencies } = this.props;
+
+    // console.log(currencies);
+
+    const currenciesForExchange = Object.keys(currencies);
+
+    // console.log(currenciesForExchange);
+
+    // const currenciesForExchange = [
+    //   'USD',
+    //   'CAD',
+    //   'EUR',
+    //   'GBP',
+    //   'ARS',
+    //   'BTC',
+    //   'LTC',
+    //   'JPY',
+    //   'CHF',
+    //   'AUD',
+    //   'CNY',
+    //   'ILS',
+    //   'ETH',
+    //   'XRP',
+    // ];
 
     return (
       <div>
@@ -134,9 +142,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label
-            htmlFor="currency"
-          >
+          <label htmlFor="currency">
             Moeda:
             <select
               data-testid="currency-input"
@@ -146,7 +152,6 @@ class ExpensesForm extends Component {
               value={ currency }
               onChange={ this.handleOnInputChange }
             >
-              <option value="defaultSelect">Selecione a moeda</option>
               {currenciesForExchange.map((currencyForExchange) => (
                 <option
                   data-testid={ currencyForExchange }
@@ -214,12 +219,17 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrenciesApi: () => dispatch(getCurrencyThunk()),
-  addSpentValue: (spentValue) => dispatch(addExpenseValueAct(spentValue)),
+  addSpentValue: (expense) => dispatch(addExpenseValueAct(expense)),
 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
 
 ExpensesForm.propTypes = {
+  addSpentValue: PropTypes.func.isRequired,
   fetchCurrenciesApi: PropTypes.func.isRequired,
+  currencies: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
 };

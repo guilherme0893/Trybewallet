@@ -15,16 +15,16 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ADD_EXPENSE: {
-    const expenses = [...state.expenses, action.expenses]
-      .map((expense, id) => ({ id, ...expense }));
-    return { ...state, expenses };
+    const expense = [...state.expenses, action.expenses]
+      .map((expenseValue, id) => ({ id, ...expenseValue }));
+    return { ...state, expense };
   }
   case REQUEST_API:
     return { ...state };
   case GET_CURRENCIES_SUCESS: {
     const { currency } = action;
     delete currency.USDT;
-    return { ...state, currencies: currency };
+    return { ...state, expenses: [action.expenses] };
   }
   case GET_CURRENCIES_FAIL: {
     return { ...state, error: action.error };

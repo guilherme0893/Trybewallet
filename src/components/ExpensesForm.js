@@ -11,10 +11,15 @@ class ExpensesForm extends Component {
       value: 0,
       description: '',
       currency: 'USD',
-      method: 'defaultSelect',
-      tag: 'defaultSelect',
-      // o uso do defaultSelect segue o link abaixo
-      // https://stackoverflow.com/questions/21733847/react-jsx-selecting-selected-on-selected-select-option
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      // defaultExpense: {
+      //   value: '0',
+      //   description: '',
+      //   currency: 'USD',
+      //   method: 'Dinheiro',
+      //   tag: 'Alimentação',
+      // },
     };
 
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
@@ -23,52 +28,44 @@ class ExpensesForm extends Component {
   }
 
   componentDidMount() {
+    // const { getCurrencies } = this;
+    // console.log(this.getCurrencies());
     this.getCurrencies();
   }
 
   getCurrencies() {
     // Acessado após o mapDispatch -- atenção o nome porque repetiu antes!!
-    const { fetchCurrenciesApi } = this.props;
-    fetchCurrenciesApi();
+    const { getCurrencyThunk } = this.props;
+    // const { exchangesRates } = this.state;
+    getCurrencyThunk();
+    // this.setState({ exchangesRates: currencies });
+    // console.log(currencies);
   }
 
-  handleAddValue() {
-    // formato das despesas
-    // id
-    // value
-    // description
-    // currency
-    // method
-    // tag
-    // exchangesRates:{moedas}
+  handleAddValue(event) {
+    event.preventDefault();
 
-    const { fetchCurrenciesApi } = this.props;
+    const { getCurrencyThunk } = this.props;
 
-    fetchCurrenciesApi().then(() => {
+    getCurrencyThunk().then(() => {
       const {
-        state: { value, description, currency, tag, method },
-        props: { currencies, addSpentValue },
+        // state: { value, description, currency, tag, method },
+        props: { addExpenseValueAct, currencies },
       } = this;
 
-      const defaultExpense = {
-        value,
-        description,
-        currency,
-        method,
-        tag,
-        exchangeCurrency: currencies,
-      };
+      delete currencies.USDT;
 
-      addSpentValue(defaultExpense);
+      const { expenses } = this.props;
 
-      this.setState({
-        value: 0,
-        description: '',
-        currency: 'defaultSelect',
-        method: 'defaultSelect',
-        tag: 'defaultSelect',
-      });
+      addExpenseValueAct(expenses);
     });
+    // this.setState({
+    //   value: 0,
+    //   description: '',
+    //   currency: 'defaultSelect',
+    //   method: 'defaultSelect',
+    //   tag: 'defaultSelect',
+    // });
   }
 
   handleOnInputChange(event) {
@@ -80,17 +77,20 @@ class ExpensesForm extends Component {
   render() {
     // console.log(this.props);
 
+    // const {
+    //   defaultExpense: { value, currency, method, description, tag },
+    // } = this.state;
+
     const {
-      value,
-      description,
-      currency,
-      method,
-      tag,
+      value, currency, method, description, tag,
     } = this.state;
 
-    const { currencies } = this.props;
+    const {
+      currencies,
+    } = this.props;
 
     // console.log(currencies);
+    // console.log(exchangesRates);
 
     const currenciesForExchange = Object.keys(currencies);
 
@@ -188,6 +188,9 @@ class ExpensesForm extends Component {
         <button
           type="button"
           onClick={ this.handleAddValue }
+          // onClick={ () => {
+          //   getCurrencyThunk().then(() => addExpenseValueAct({ id: 'ola' }));
+          // } }
         >
           Adicionar despesa
         </button>
@@ -198,17 +201,19 @@ class ExpensesForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrenciesApi: () => dispatch(getCurrencyThunk()),
-  addSpentValue: (expense) => dispatch(addExpenseValueAct(expense)),
+  getCurrencyThunk: () => dispatch(getCurrencyThunk()),
+  addExpenseValueAct: (expense) => dispatch(addExpenseValueAct(expense)),
 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
 
 ExpensesForm.propTypes = {
+  expenses: PropTypes.number.isRequired,
   addSpentValue: PropTypes.func.isRequired,
   fetchCurrenciesApi: PropTypes.func.isRequired,
   currencies: PropTypes.oneOfType([

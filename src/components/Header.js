@@ -6,14 +6,14 @@ class Header extends Component {
   // constructor(props) {
   //   super(props);
 
-  //   this.getTotalValue = this.getTotalValue.bind(this);
+  //   // this.getTotalValue = this.getTotalValue.bind(this);
   // }
 
   // getTotalValue() {
-  //   const { expense } = this.props;
+  //   const { expenses } = this.props;
   //   // console.log(expense); --> tá vindo vazio !!
-  //   let totalValue = expense.reduce((acc, value) => {
-  //     totalValue = acc + value;
+  //   const totalValue = expenses.reduce((acc, value) => {
+  //     acc += acc + value;
   //     return totalValue;
   //   });
   //   console.log('eu sou o reduce!');
@@ -23,6 +23,7 @@ class Header extends Component {
     // const { expenseValues } = this.props;
     // console.log(expenseValues);
     // console.log('sou a expenses');
+    // const totalValue = this.getTotalValue();
     const BRL = 'BRL';
     const { email } = this.props;
     return (
@@ -37,7 +38,7 @@ class Header extends Component {
           data-testid="total-field"
         >
           Despesa total:
-          {/* { this.getTotalValue() } */}
+          {/* { totalValue } */}
         </h3>
         <h3
           data-testid="header-currency-field"
@@ -51,12 +52,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  expense: state.wallet.expenses,
+  expenses: state.wallet.expenses,
 });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  // expense: PropTypes.arrayOf(PropTypes.number).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

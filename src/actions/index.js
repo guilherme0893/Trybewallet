@@ -12,9 +12,9 @@ export const addUserAct = (email) => ({
   email,
 });
 
-export const addExpenseValueAct = (expenses) => ({
+export const addExpenseValueAct = (expense) => ({
   type: ADD_EXPENSE,
-  expenses,
+  expense,
 });
 
 export const requestCurrencyApi = () => ({

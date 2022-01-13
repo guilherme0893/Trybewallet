@@ -134,7 +134,7 @@ class ExpensesForm extends Component {
               {currenciesForExchange.map((currencyForExchange) => (
                 <option
                   data-testid={ currencyForExchange }
-                  key={ `${currencyForExchange}` }
+                  key={ `currency-${currenciesForExchange}` }
                   value={ currencyForExchange }
                 >
                   { currencyForExchange }

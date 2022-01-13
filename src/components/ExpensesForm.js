@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExpenseValueAct, getCurrencyThunk } from '../actions/index';
+import { addExpenseValue, getCurrencyThunk } from '../actions/index';
 
 class ExpensesForm extends Component {
   constructor(props) {
@@ -11,15 +11,8 @@ class ExpensesForm extends Component {
       value: 0,
       description: '',
       currency: 'USD',
-      method: 'Dinheiro',
+      method: 'Cartão de crédito',
       tag: 'Alimentação',
-      // defaultExpense: {
-      //   value: '0',
-      //   description: '',
-      //   currency: 'USD',
-      //   method: 'Dinheiro',
-      //   tag: 'Alimentação',
-      // },
     };
 
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
@@ -29,43 +22,46 @@ class ExpensesForm extends Component {
 
   componentDidMount() {
     // const { getCurrencies } = this;
-    // console.log(this.getCurrencies());
     this.getCurrencies();
   }
 
   getCurrencies() {
-    // Acessado após o mapDispatch -- atenção o nome porque repetiu antes!!
-    const { getCurrencyThunk } = this.props;
+    const { getCurrencyThunkAct } = this.props;
     // const { exchangesRates } = this.state;
-    getCurrencyThunk();
-    // this.setState({ exchangesRates: currencies });
-    // console.log(currencies);
+    getCurrencyThunkAct();
+    // console.log(getCurrencyThunkAct());
   }
 
   handleAddValue(event) {
     event.preventDefault();
 
-    const { getCurrencyThunk } = this.props;
+    const { getCurrencyThunkAct } = this.props;
 
-    getCurrencyThunk().then(() => {
+    getCurrencyThunkAct().then(() => {
       const {
-        // state: { value, description, currency, tag, method },
+        state: { value, description, currency, tag, method },
         props: { addExpenseValueAct, currencies },
       } = this;
 
-      delete currencies.USDT;
+      const defaultExpense = {
+        value,
+        description,
+        currency,
+        method,
+        tag,
+        exchangeRates: currencies,
+      };
 
-      const { expenses } = this.props;
+      addExpenseValueAct(defaultExpense);
 
-      addExpenseValueAct(expenses);
+      this.setState({
+        value: 0,
+        description: '',
+        currency: '',
+        method: '',
+        tag: '',
+      });
     });
-    // this.setState({
-    //   value: 0,
-    //   description: '',
-    //   currency: 'defaultSelect',
-    //   method: 'defaultSelect',
-    //   tag: 'defaultSelect',
-    // });
   }
 
   handleOnInputChange(event) {
@@ -75,19 +71,19 @@ class ExpensesForm extends Component {
   }
 
   render() {
-    // console.log(this.props);
-
-    // const {
-    //   defaultExpense: { value, currency, method, description, tag },
-    // } = this.state;
-
     const {
-      value, currency, method, description, tag,
+      value,
+      currency,
+      method,
+      description,
+      tag,
     } = this.state;
 
     const {
       currencies,
     } = this.props;
+
+    delete currencies.USDT;
 
     // console.log(currencies);
     // console.log(exchangesRates);
@@ -129,7 +125,7 @@ class ExpensesForm extends Component {
             Moeda:
             <select
               data-testid="currency-input"
-              type="number"
+              // type="number"
               name="currency"
               id="currency"
               value={ currency }
@@ -146,51 +142,38 @@ class ExpensesForm extends Component {
               ))}
             </select>
           </label>
-          <label
-            htmlFor="method"
+          <select
+            data-testid="method-input"
+            name="method"
+            onChange={ this.handleOnInputChange }
+            value={ method }
           >
-            Método de pagamento:
-            <select
-              data-testid="method-input"
-              name="method"
-              value={ method }
-              onChange={ this.handleOnInputChange }
-            >
-              <option value="defaultSelect">Selecione o método de pagamento</option>
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Cartão de crédito">Cartão de crédito</option>
-              <option value="Cartão de débito">Cartão de débito</option>
-            </select>
-          </label>
-          <label
-            htmlFor="tag"
+            <option value="defaultSelect" disabled hidden>Método de pagamento</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
+          </select>
+          <select
+            data-testid="tag-input"
+            name="tag"
+            value={ tag }
+            onChange={ this.handleOnInputChange }
           >
-            Tag:
-            <select
-              data-testid="tag-input"
-              name="tag"
-              value={ tag }
-              onChange={ this.handleOnInputChange }
+            <option
+              value="defaultSelect"
             >
-              <option
-                value="defaultSelect"
-              >
-                Selecione uma tag
-              </option>
-              <option>Alimentação</option>
-              <option>Lazer</option>
-              <option>Trabalho</option>
-              <option>Transporte</option>
-              <option>Saúde</option>
-            </select>
-          </label>
+              Selecione uma tag
+            </option>
+            <option>Alimentação</option>
+            <option>Lazer</option>
+            <option>Trabalho</option>
+            <option>Transporte</option>
+            <option>Saúde</option>
+          </select>
         </form>
         <button
           type="button"
           onClick={ this.handleAddValue }
-          // onClick={ () => {
-          //   getCurrencyThunk().then(() => addExpenseValueAct({ id: 'ola' }));
-          // } }
         >
           Adicionar despesa
         </button>
@@ -201,21 +184,21 @@ class ExpensesForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
+  // expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrencyThunk: () => dispatch(getCurrencyThunk()),
-  addExpenseValueAct: (expense) => dispatch(addExpenseValueAct(expense)),
+  getCurrencyThunkAct: () => dispatch(getCurrencyThunk()),
+  addExpenseValueAct: (expense) => dispatch(addExpenseValue(expense)),
 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
 
 ExpensesForm.propTypes = {
-  expenses: PropTypes.number.isRequired,
-  addSpentValue: PropTypes.func.isRequired,
-  fetchCurrenciesApi: PropTypes.func.isRequired,
+  // expenses: PropTypes.number.isRequired,
+  addExpenseValueAct: PropTypes.func.isRequired,
+  getCurrencyThunkAct: PropTypes.func.isRequired,
   currencies: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,

@@ -9,34 +9,22 @@ import {
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  error: '',
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case ADD_EXPENSE:
-    // const expenses = [...state.expenses, action.expense]; // .map((expense, id) => ({ id, ...expense }));
-    return { ...state, expenses: [action.expenses],
-      // expenses: [
-      //   // ...state.expenses, {
-      //     // id,
-      //     // value,
-      //     // description,
-      //     // currency,
-      //     // method,
-      //     // tag,
-      //     // exchangeRates,
-      //   },
-      // ],
-    };
   case REQUEST_API:
     return { ...state };
   case GET_CURRENCIES_SUCCESS: {
-    const { currencies } = action;
-    return { ...state, expenses: action.expenses, currencies };
+    return { ...state, currencies: action.currencies };
   }
   case GET_CURRENCIES_FAIL: {
-    return { ...state, error: action.error };
+    return { ...state };
+  }
+  case ADD_EXPENSE: {
+    const expenses = [...state.expenses, action.expenses]
+      .map((expense, id) => ({ id, ...expense }));
+    return { ...state, expenses };
   }
   default:
     return state;

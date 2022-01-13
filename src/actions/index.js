@@ -12,7 +12,7 @@ export const addUserAct = (email) => ({
   email,
 });
 
-export const addExpenseValueAct = (expense) => ({
+export const addExpenseValue = (expense) => ({
   type: ADD_EXPENSE,
   expense,
 });

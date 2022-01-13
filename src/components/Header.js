@@ -24,26 +24,19 @@ class Header extends Component {
     // console.log(expenseValues);
     // console.log('sou a expenses');
     // const totalValue = this.getTotalValue();
-    const BRL = 'BRL';
-    const { email } = this.props;
+    const { email, expenses } = this.props;
     return (
       <header>
         <h1>Trybewallet</h1>
-        <h3
-          data-testid="email-field"
-        >
-          {`${email}`}
+        <h3 data-testid="email-field">
+          { email }
         </h3>
-        <h3
-          data-testid="total-field"
-        >
+        <h3 data-testid="total-field">
           Despesa total:
           {/* { totalValue } */}
         </h3>
-        <h3
-          data-testid="header-currency-field"
-        >
-          {BRL}
+        <h3 data-testid="header-currency-field">
+          BRL - R$
         </h3>
       </header>
     );
@@ -57,7 +50,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.number).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

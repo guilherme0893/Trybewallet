@@ -16,6 +16,8 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REQUEST_API:
     return { ...state };
   case GET_CURRENCIES_SUCCESS: {
+    const { currencies } = action;
+    delete currencies.USDT;
     return { ...state, currencies: action.currencies };
   }
   case GET_CURRENCIES_FAIL: {

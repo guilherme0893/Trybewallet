@@ -32,9 +32,7 @@ class ExpensesForm extends Component {
     // console.log(getCurrencyThunkAct());
   }
 
-  handleAddValue(event) {
-    event.preventDefault();
-
+  handleAddValue() {
     const { getCurrencyThunkAct } = this.props;
 
     getCurrencyThunkAct().then(() => {
@@ -56,10 +54,10 @@ class ExpensesForm extends Component {
 
       this.setState({
         value: 0,
-        description: '',
-        currency: '',
-        method: '',
-        tag: '',
+        description: 'defaultSelect',
+        currency: 'defaultSelect',
+        method: 'defaultSelect',
+        tag: 'defaultSelect',
       });
     });
   }
@@ -83,21 +81,13 @@ class ExpensesForm extends Component {
       currencies,
     } = this.props;
 
-    delete currencies.USDT;
-
-    // console.log(currencies);
-    // console.log(exchangesRates);
-
     const currenciesForExchange = Object.keys(currencies);
-
     // console.log(currenciesForExchange);
 
     return (
       <div>
         <form>
-          <label
-            htmlFor="value"
-          >
+          <label htmlFor="value">
             Valor:
             <input
               data-testid="value-input"
@@ -108,9 +98,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label
-            htmlFor="description"
-          >
+          <label htmlFor="description">
             Descrição:
             <input
               data-testid="description-input"
@@ -121,20 +109,21 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label htmlFor="currency">
-            Moeda:
+          <label htmlFor="currency-input">
+            Moeda
             <select
+              aria-label="Moeda"
               data-testid="currency-input"
-              // type="number"
               name="currency"
-              id="currency"
               value={ currency }
               onChange={ this.handleOnInputChange }
             >
+              <option value="defaultSelect" disabled hidden>Selecione uma moeda</option>
+              {/* <option value="BRL">BRL</option> */}
               {currenciesForExchange.map((currencyForExchange) => (
                 <option
                   data-testid={ currencyForExchange }
-                  key={ `currency-${currenciesForExchange}` }
+                  key={ `${currencyForExchange}` }
                   value={ currencyForExchange }
                 >
                   { currencyForExchange }
@@ -164,11 +153,11 @@ class ExpensesForm extends Component {
             >
               Selecione uma tag
             </option>
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </form>
         <button

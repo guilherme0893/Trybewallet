@@ -109,7 +109,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label htmlFor="currency-input">
+          <label htmlFor="currency">
             Moeda
             <select
               aria-label="Moeda"
@@ -119,7 +119,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             >
               <option value="defaultSelect" disabled hidden>Selecione uma moeda</option>
-              {/* <option value="BRL">BRL</option> */}
+              {/* <option value="USD">USD</option> */}
               {currenciesForExchange.map((currencyForExchange) => (
                 <option
                   data-testid={ currencyForExchange }

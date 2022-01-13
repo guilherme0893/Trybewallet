@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 class Table extends Component {
   render() {
     const { expenses } = this.props;
+    // console.log(this.state);
+    // console.log(currencies);
     console.log(expenses);
-    console.log('sou as expenses');
     return (
       <div>
         {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}
@@ -27,11 +28,29 @@ class Table extends Component {
           https://stackoverflow.com/questions/39914455/react-validatedomnesting-text-cannot-appear-as-a-child-of-tr
           https://stackoverflow.com/questions/61498491/how-to-fix-validatedomnesting-td-cannot-appear-as-a-child-of-tbody-an */}
           <tbody>
-            {/* {expenses.map((expense, index) => (
-              <tr key={ index }>
+            {expenses.map((expense, index) => (
+              <tr key={ `${expense.id}` }>
+                <th>{ `${index + 1}`}</th>
+                <td>{expense.tag}</td>
+                <td>{expense.method}</td>
+                <td>{expense.value}</td>
                 <td>{expense.description}</td>
+                <td>{expense.exchangeRates[expense.currency].name.split('/')[0]}</td>
+                <td>
+                  {
+                    parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)
+                  }
+                </td>
+                <td>
+                  {
+                    parseFloat(parseFloat(expense.value) * parseFloat(
+                      expense.exchangeRates[expense.currency].ask,
+                    )).toFixed(2)
+                  }
+                </td>
+                <td>Real</td>
               </tr>
-            ))} */}
+            ))}
           </tbody>
           {/* <tbody>
             <tr>
@@ -46,10 +65,11 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  currencies: state.wallet.currencies,
 });
 
 Table.propTypes = {
-  expenses: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

@@ -18,7 +18,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case GET_CURRENCIES_SUCCESS: {
     const { currencies } = action;
     delete currencies.USDT;
-    return { ...state, currencies: action.currencies };
+    return { ...state, currencies: currencies };
   }
   case GET_CURRENCIES_FAIL: {
     return { ...state };

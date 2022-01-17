@@ -12,28 +12,27 @@ export const addUserAct = (email) => ({
   email,
 });
 
-export const addExpenseValue = (expense) => ({
+export const addExpenseValue = (payload) => ({
   type: ADD_EXPENSE,
-  expense,
+  payload,
 });
 
-export const requestCurrencyApi = () => ({
+const requestCurrencyApi = () => ({
   type: REQUEST_API,
 });
 
-const getCurrenciesSuccess = (currencies) => ({
+const getCurrenciesSuccess = (payload) => ({
   type: GET_CURRENCIES_SUCCESS,
-  currencies,
+  payload,
 });
 
-const getCurrenciesFail = (error) => ({
+const getCurrenciesFail = () => ({
   type: GET_CURRENCIES_FAIL,
-  error,
 });
 
 export const getCurrencyThunk = () => (dispatch) => {
   dispatch(requestCurrencyApi());
   return getCurrencies()
-    .then((data) => dispatch(getCurrenciesSuccess(data)))
-    .catch((error) => dispatch(getCurrenciesFail(error)));
+    .then((payload) => dispatch(getCurrenciesSuccess(payload)))
+    .catch(() => dispatch(getCurrenciesFail()));
 };

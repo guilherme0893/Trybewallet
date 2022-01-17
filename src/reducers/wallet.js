@@ -9,24 +9,41 @@ import {
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  error: '',
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_API:
-    return { ...state };
-  case GET_CURRENCIES_SUCCESS: {
-    const { currencies } = action;
-    delete currencies.USDT;
-    return { ...state, currencies: currencies };
-  }
-  case GET_CURRENCIES_FAIL: {
-    return { ...state };
-  }
+    return {
+      ...state,
+    };
+  case GET_CURRENCIES_SUCCESS:
+    return {
+      ...state,
+      currencies: Object.keys(action.payload),
+      exchangeRates: action.payload,
+    };
+  case GET_CURRENCIES_FAIL:
+    return {
+      ...state,
+      error: 'Fetch API failed!',
+    };
   case ADD_EXPENSE: {
-    const expenses = [...state.expenses, action.expenses]
-      .map((expense, id) => ({ id, ...expense }));
-    return { ...state, expenses };
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses,
+        {
+          id: state.expenses.length,
+          exchangeRates: state.exchangeRates,
+          description: action.payload.description,
+          value: action.payload.value,
+          currency: action.payload.currency,
+          method: action.payload.method,
+          tag: action.payload.tag,
+        }],
+    };
   }
   default:
     return state;

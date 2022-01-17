@@ -17,48 +17,23 @@ class ExpensesForm extends Component {
 
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
     this.handleAddValue = this.handleAddValue.bind(this);
-    this.getCurrencies = this.getCurrencies.bind(this);
   }
 
   componentDidMount() {
-    // const { getCurrencies } = this;
-    this.getCurrencies();
-  }
-
-  getCurrencies() {
     const { getCurrencyThunkAct } = this.props;
-    // const { exchangesRates } = this.state;
     getCurrencyThunkAct();
-    // console.log(getCurrencyThunkAct());
   }
 
-  handleAddValue() {
-    const { getCurrencyThunkAct } = this.props;
-
-    getCurrencyThunkAct().then(() => {
-      const {
-        state: { value, description, currency, tag, method },
-        props: { addExpenseValueAct, currencies },
-      } = this;
-
-      const defaultExpense = {
-        value,
-        description,
-        currency,
-        method,
-        tag,
-        exchangeRates: currencies,
-      };
-
-      addExpenseValueAct(defaultExpense);
-
-      this.setState({
-        value: 0,
-        description: 'defaultSelect',
-        currency: 'defaultSelect',
-        method: 'defaultSelect',
-        tag: 'defaultSelect',
-      });
+  handleAddValue = async () => {
+    const { getCurrencyThunkAct, addExpenseValueAct } = this.props;
+    getCurrencyThunkAct();
+    await addExpenseValueAct(this.state);
+    this.setState({
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
     });
   }
 
@@ -81,7 +56,11 @@ class ExpensesForm extends Component {
       currencies,
     } = this.props;
 
-    const currenciesForExchange = Object.keys(currencies);
+    // console.log(currencies);
+    const coinControl = 'USDT';
+    const currenciesForExchange = currencies
+      .filter((currencyControl) => currencyControl !== coinControl);
+    // const currenciesForExchange = Object.keys(currencies);
     // console.log(currenciesForExchange);
 
     return (
@@ -104,26 +83,24 @@ class ExpensesForm extends Component {
               data-testid="description-input"
               type="text"
               name="description"
-              id="description"
               value={ description }
               onChange={ this.handleOnInputChange }
             />
           </label>
           <label htmlFor="currency">
-            Moeda
+            Moeda:
             <select
-              aria-label="Moeda"
+              // aria-label="Moeda"
               data-testid="currency-input"
               name="currency"
+              id="currency"
               value={ currency }
               onChange={ this.handleOnInputChange }
             >
-              <option value="defaultSelect" disabled hidden>Selecione uma moeda</option>
-              {/* <option value="USD">USD</option> */}
               {currenciesForExchange.map((currencyForExchange) => (
                 <option
                   data-testid={ currencyForExchange }
-                  key={ `${currencyForExchange}` }
+                  key={ currencyForExchange }
                   value={ currencyForExchange }
                 >
                   { currencyForExchange }
@@ -142,23 +119,22 @@ class ExpensesForm extends Component {
             <option value="Cartão de crédito">Cartão de crédito</option>
             <option value="Cartão de débito">Cartão de débito</option>
           </select>
-          <select
-            data-testid="tag-input"
-            name="tag"
-            value={ tag }
-            onChange={ this.handleOnInputChange }
-          >
-            <option
-              value="defaultSelect"
+          <label htmlFor="tag">
+            Tag:
+            <select
+              data-testid="tag-input"
+              name="tag"
+              id="tag"
+              value={ tag }
+              onChange={ this.handleOnInputChange }
             >
-              Selecione uma tag
-            </option>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
+            </select>
+          </label>
         </form>
         <button
           type="button"
@@ -173,12 +149,12 @@ class ExpensesForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  // expenses: state.wallet.expenses,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencyThunkAct: () => dispatch(getCurrencyThunk()),
-  addExpenseValueAct: (expense) => dispatch(addExpenseValue(expense)),
+  addExpenseValueAct: (payload) => dispatch(addExpenseValue(payload)),
 
 });
 
@@ -188,8 +164,5 @@ ExpensesForm.propTypes = {
   // expenses: PropTypes.number.isRequired,
   addExpenseValueAct: PropTypes.func.isRequired,
   getCurrencyThunkAct: PropTypes.func.isRequired,
-  currencies: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]).isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

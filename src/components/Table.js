@@ -28,29 +28,31 @@ class Table extends Component {
           https://stackoverflow.com/questions/39914455/react-validatedomnesting-text-cannot-appear-as-a-child-of-tr
           https://stackoverflow.com/questions/61498491/how-to-fix-validatedomnesting-td-cannot-appear-as-a-child-of-tbody-an */}
           <tbody>
-            {expenses.map((expense, index) => (
-              <tr key={ `${expense.id}` }>
-                <th>{ `${index + 1}`}</th>
-                <td>{expense.tag}</td>
-                <td>{expense.method}</td>
-                <td>{expense.value}</td>
-                <td>{expense.description}</td>
-                <td>{expense.exchangeRates[expense.currency].name.split('/')[0]}</td>
-                <td>
-                  {
-                    parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)
-                  }
-                </td>
-                <td>
-                  {
-                    parseFloat(parseFloat(expense.value) * parseFloat(
-                      expense.exchangeRates[expense.currency].ask,
-                    )).toFixed(2)
-                  }
-                </td>
-                <td>Real</td>
-              </tr>
-            ))}
+            {
+              expenses !== [] && (
+                expenses.map((expense) => (
+                  <tr key={ expense.id }>
+                    <td>{expense.tag}</td>
+                    <td>{expense.description}</td>
+                    <td>{expense.method}</td>
+                    <td>{expense.value}</td>
+                    <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
+                    <td>
+                      {
+                        Number(expense.exchangeRates[expense.currency].ask).toFixed(2)
+                      }
+                    </td>
+                    <td>
+                      {
+                        (Number(expense.exchangeRates[expense.currency].ask)
+                          * Number(expense.value).toFixed(2))
+                      }
+                    </td>
+                    <td>Real</td>
+                  </tr>
+                ))
+              )
+            }
           </tbody>
           {/* <tbody>
             <tr>
@@ -65,11 +67,11 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
-  currencies: state.wallet.currencies,
+  // currencies: state.wallet.currencies,
 });
 
 Table.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

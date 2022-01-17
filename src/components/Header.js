@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// alteração para commit teste
 
 class Header extends Component {
   constructor(props) {

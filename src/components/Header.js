@@ -17,6 +17,9 @@ class Header extends Component {
   getTotalValue() {
     const { expenses } = this.props;
     // console.log(expenses);
+    // const { exchangeRates, currency } = expenses;
+    // console.log(exchangeRates);
+    // console.log(currency);
     const totalValue = expenses
       .map(({ exchangeRates, currency, value }) => (exchangeRates[currency].ask) * value);
     if (totalValue !== []) {

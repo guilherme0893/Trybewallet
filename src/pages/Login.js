@@ -12,16 +12,17 @@ class Login extends React.Component {
       email: '',
       password: '',
       isUserLogged: false,
+      isButtonDisabled: true,
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-    this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
+    // this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
   }
 
   onInputChange(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => this.validateEmailAndPassword());
   }
 
   onLoginButtonClick() {
@@ -37,17 +38,22 @@ class Login extends React.Component {
     // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
     const validation = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
     const emailValidation = email.match(validation);
-
     const passwordInputControl = 6;
 
-    return (
-      !emailValidation || password.length < passwordInputControl
-    );
+    if (!emailValidation || password.length < passwordInputControl) {
+      this.setState({
+        isButtonDisabled: true,
+      });
+    } else {
+      this.setState({
+        isButtonDisabled: false,
+      });
+    }
   }
 
   render() {
-    const { email, password, isUserLogged } = this.state;
-    const validateEmailAndPassword = this.validateEmailAndPassword();
+    const { email, password, isUserLogged, isButtonDisabled } = this.state;
+    // const validateEmailAndPassword = this.validateEmailAndPassword();
 
     if (isUserLogged) return <Redirect to="/carteira" />;
 
@@ -78,7 +84,7 @@ class Login extends React.Component {
         <button
           type="button"
           onClick={ this.onLoginButtonClick }
-          disabled={ validateEmailAndPassword }
+          disabled={ isButtonDisabled }
         >
           Entrar
         </button>

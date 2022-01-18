@@ -7,7 +7,7 @@ class Table extends Component {
     const { expenses } = this.props;
     // console.log(this.state);
     // console.log(currencies);
-    console.log(expenses);
+    // console.log(expenses);
     return (
       <div>
         {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}
@@ -36,6 +36,8 @@ class Table extends Component {
                     <td>{expense.description}</td>
                     <td>{expense.method}</td>
                     <td>{expense.value}</td>
+                    {/* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+                        // melhor método porque a moeda é uma string só */}
                     <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
                     <td>
                       {
@@ -49,6 +51,15 @@ class Table extends Component {
                       }
                     </td>
                     <td>Real</td>
+                    <td>
+                      <button
+                        data-testid="delete-btn"
+                        type="button"
+                        // onClick={ this.deleteValue }
+                      >
+                        Deletar despesa
+                      </button>
+                    </td>
                   </tr>
                 ))
               )

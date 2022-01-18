@@ -11,8 +11,8 @@ class ExpensesForm extends Component {
       value: 0,
       description: '',
       currency: 'USD',
-      method: 'Cartão de crédito',
-      tag: 'Alimentação',
+      method: '',
+      tag: '',
     };
 
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
@@ -24,14 +24,15 @@ class ExpensesForm extends Component {
     getCurrencyThunkAct();
   }
 
-  handleAddValue = async () => {
+  handleAddValue = async (event) => {
+    event.preventDefault();
     const { getCurrencyThunkAct, addExpenseValueAct } = this.props;
     getCurrencyThunkAct();
     await addExpenseValueAct(this.state);
     this.setState({
-      value: '',
+      value: 0,
       description: '',
-      currency: '',
+      currency: 'USD',
       method: '',
       tag: '',
     });
@@ -90,22 +91,24 @@ class ExpensesForm extends Component {
           <label htmlFor="currency">
             Moeda:
             <select
-              // aria-label="Moeda"
+            // o uso do id segue indicado na resposta da Fernanda Andrade no slack, e corroborado na revisão
               data-testid="currency-input"
               name="currency"
               id="currency"
               value={ currency }
               onChange={ this.handleOnInputChange }
             >
-              {currenciesForExchange.map((currencyForExchange) => (
-                <option
-                  data-testid={ currencyForExchange }
-                  key={ currencyForExchange }
-                  value={ currencyForExchange }
-                >
-                  { currencyForExchange }
-                </option>
-              ))}
+              {/* é uma garantia que o array existe e não está zerado */}
+              {currenciesForExchange.length > 0
+                && currenciesForExchange.map((currencyForExchange) => (
+                  <option
+                    data-testid={ currencyForExchange }
+                    key={ currencyForExchange }
+                    value={ currencyForExchange }
+                  >
+                    { currencyForExchange }
+                  </option>
+                ))}
             </select>
           </label>
           <select

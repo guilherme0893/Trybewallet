@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { removeExpense } from '../actions/index';
 
 class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.removeExpenseFromTable = this.removeExpenseFromTable.bind(this);
+  }
+
+  removeExpenseFromTable(id) {
+    const { expenses, removeExpenses } = this.props;
+    const filteredArray = expenses.filter((expense) => expense.id !== id);
+    removeExpenses(filteredArray);
+  }
+
   render() {
     const { expenses } = this.props;
-    // console.log(this.state);
-    // console.log(currencies);
-    // console.log(expenses);
     return (
       <div>
         {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}
@@ -55,7 +64,7 @@ class Table extends Component {
                       <button
                         data-testid="delete-btn"
                         type="button"
-                        // onClick={ this.deleteValue }
+                        onClick={ () => this.removeExpenseFromTable(expense.id) }
                       >
                         Deletar despesa
                       </button>
@@ -81,8 +90,13 @@ const mapStateToProps = (state) => ({
   // currencies: state.wallet.currencies,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  removeExpenses: (payload) => dispatch(removeExpense(payload)),
+});
+
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeExpenses: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

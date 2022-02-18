@@ -4,6 +4,7 @@ import {
   REQUEST_API,
   GET_CURRENCIES_SUCCESS,
   GET_CURRENCIES_FAIL,
+  REMOVE_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -43,6 +44,12 @@ const wallet = (state = INITIAL_STATE, action) => {
           method: action.payload.method,
           tag: action.payload.tag,
         }],
+    };
+  }
+  case REMOVE_EXPENSE: {
+    return {
+      ...state,
+      expenses: action.payload,
     };
   }
   default:

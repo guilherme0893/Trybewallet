@@ -1,4 +1,3 @@
-// Coloque aqui suas actions
 import getCurrencies from '../services/currencyAPI';
 
 export const ADD_USER = 'ADD_USER';

@@ -19,7 +19,6 @@ class Table extends Component {
     const { expenses } = this.props;
     return (
       <div>
-        {/* the ideia of table ---> https://www.w3schools.com/tags/tag_table.asp */}
         <table>
           <thead>
             <tr>
@@ -33,9 +32,6 @@ class Table extends Component {
               <th>Editar/Excluir </th>
             </tr>
           </thead>
-          {/* source of the following organization of tbody and tr and td -- some changes were made in the usage of tbody
-          https://stackoverflow.com/questions/39914455/react-validatedomnesting-text-cannot-appear-as-a-child-of-tr
-          https://stackoverflow.com/questions/61498491/how-to-fix-validatedomnesting-td-cannot-appear-as-a-child-of-tbody-an */}
           <tbody>
             {
               expenses !== [] && (
@@ -45,8 +41,6 @@ class Table extends Component {
                     <td>{expense.description}</td>
                     <td>{expense.method}</td>
                     <td>{expense.value}</td>
-                    {/* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-                        // melhor método porque a moeda é uma string só */}
                     <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
                     <td>
                       {
@@ -74,11 +68,6 @@ class Table extends Component {
               )
             }
           </tbody>
-          {/* <tbody>
-            <tr>
-              <th>Teste</th>
-            </tr>
-          </tbody> */}
         </table>
       </div>
     );
@@ -87,7 +76,6 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
-  // currencies: state.wallet.currencies,
 });
 
 const mapDispatchToProps = (dispatch) => ({

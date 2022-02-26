@@ -51,42 +51,55 @@ class Login extends React.Component {
 
   render() {
     const { email, password, isUserLogged, isButtonDisabled } = this.state;
-    // const validateEmailAndPassword = this.validateEmailAndPassword();
 
     if (isUserLogged) return <Redirect to="/carteira" />;
 
     return (
-      <form>
-        <label htmlFor="email">
-          Email
-          <input
-            data-testid="email-input"
-            type="text"
-            name="email"
-            id="email"
-            value={ email }
-            onChange={ this.onInputChange }
-          />
-        </label>
-        <label htmlFor="password">
-          Senha
-          <input
-            data-testid="password-input"
-            type="password"
-            name="password"
-            id="password"
-            value={ password }
-            onChange={ this.onInputChange }
-          />
-        </label>
-        <button
-          type="button"
-          onClick={ this.onLoginButtonClick }
-          disabled={ isButtonDisabled }
-        >
-          Entrar
-        </button>
-      </form>
+      <div className="flex h-screen justify-center items-center">
+        <form className="bg-white border-4 border-green-600 p-5 shadow-2xl">
+          <h1 className=" text-2xl flex justify-center items-center mb-3">TrybeWallet</h1>
+          <div className="border-4 p-2 mb-3">
+            <label htmlFor="email">
+              Email:
+              <input
+                className="ml-2"
+                placeholder="Please type your password"
+                data-testid="email-input"
+                type="text"
+                name="email"
+                id="email"
+                value={ email }
+                onChange={ this.onInputChange }
+              />
+            </label>
+          </div>
+          <div className="border-4 p-2">
+            <label htmlFor="password">
+              Senha:
+              <input
+                className="ml-2"
+                placeholder="Please type your password"
+                data-testid="password-input"
+                type="password"
+                name="password"
+                id="password"
+                value={ password }
+                onChange={ this.onInputChange }
+              />
+            </label>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button
+              className="flex items-center border-solid border-2 border-green-600 p-2"
+              type="button"
+              onClick={ this.onLoginButtonClick }
+              disabled={ isButtonDisabled }
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }

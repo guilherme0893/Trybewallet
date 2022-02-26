@@ -28,7 +28,7 @@ class Header extends Component {
     const { email } = this.props;
     const { defaultCurrency } = this.state;
     return (
-      <header>
+      <header className="flex justify-center items-center">
         <h1>Trybewallet</h1>
         <h3 data-testid="email-field">
           { email }

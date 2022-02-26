@@ -18,18 +18,66 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div>
+      <div className="mt-5 flex justify-center items-center">
         <table>
           <thead>
             <tr>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar/Excluir </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Descrição
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Tag
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Método de pagamento
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Moeda
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Câmbio utilizado
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Valor convertido
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Moeda de conversão
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Editar/Excluir
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -37,7 +85,9 @@ class Table extends Component {
               expenses !== [] && (
                 expenses.map((expense) => (
                   <tr key={ expense.id }>
-                    <td>{expense.tag}</td>
+                    <td>
+                      {expense.tag}
+                    </td>
                     <td>{expense.description}</td>
                     <td>{expense.method}</td>
                     <td>{expense.value}</td>

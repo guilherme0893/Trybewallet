@@ -62,7 +62,7 @@ class ExpensesForm extends Component {
       .filter((currencyControl) => currencyControl !== coinControl);
 
     return (
-      <div>
+      <div className="flex justify-center items-center">
         <form>
           <label htmlFor="value">
             Valor:

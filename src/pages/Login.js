@@ -17,7 +17,6 @@ class Login extends React.Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-    // this.validateEmailAndPassword = this.validateEmailAndPassword.bind(this);
   }
 
   onInputChange(event) {
@@ -34,7 +33,6 @@ class Login extends React.Component {
 
   validateEmailAndPassword() {
     const { email, password } = this.state;
-    // regex para validação
     // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
     const validation = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
     const emailValidation = email.match(validation);

@@ -57,12 +57,9 @@ class ExpensesForm extends Component {
       currencies,
     } = this.props;
 
-    // console.log(currencies);
     const coinControl = 'USDT';
     const currenciesForExchange = currencies
       .filter((currencyControl) => currencyControl !== coinControl);
-    // const currenciesForExchange = Object.keys(currencies);
-    // console.log(currenciesForExchange);
 
     return (
       <div>
@@ -91,14 +88,12 @@ class ExpensesForm extends Component {
           <label htmlFor="currency">
             Moeda:
             <select
-            // o uso do id segue indicado na resposta da Fernanda Andrade no slack, e corroborado na revisão
               data-testid="currency-input"
               name="currency"
               id="currency"
               value={ currency }
               onChange={ this.handleOnInputChange }
             >
-              {/* é uma garantia que o array existe e não está zerado */}
               {currenciesForExchange.length > 0
                 && currenciesForExchange.map((currencyForExchange) => (
                   <option
@@ -164,7 +159,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);
 
 ExpensesForm.propTypes = {
-  // expenses: PropTypes.number.isRequired,
   addExpenseValueAct: PropTypes.func.isRequired,
   getCurrencyThunkAct: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,

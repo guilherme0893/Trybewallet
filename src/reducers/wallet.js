@@ -4,11 +4,14 @@ import {
   GET_CURRENCIES_SUCCESS,
   GET_CURRENCIES_FAIL,
   REMOVE_EXPENSE,
+  EDIT_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  isEditing: false,
+  editing: {},
   error: '',
 };
 
@@ -51,6 +54,14 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: action.payload,
     };
   }
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditing: true,
+      editing: {},
+      expenses: state.expenses.map((expense) => (
+        expense.id === action.id ? action.expense : expense)),
+    };
   default:
     return state;
   }

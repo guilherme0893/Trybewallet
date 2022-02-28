@@ -19,7 +19,7 @@ class Table extends Component {
     const { expenses } = this.props;
     return (
       <div className="mt-5 flex justify-center items-center">
-        <table>
+        <table className="table-fixed">
           <thead>
             <tr>
               <th
@@ -85,34 +85,35 @@ class Table extends Component {
               expenses !== [] && (
                 expenses.map((expense) => (
                   <tr key={ expense.id }>
-                    <td>
+                    <td className="text-center">
                       {expense.tag}
                     </td>
-                    <td>{expense.description}</td>
-                    <td>{expense.method}</td>
-                    <td>{expense.value}</td>
-                    <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
-                    <td>
+                    <td className="text-center">{expense.description}</td>
+                    <td className="text-center">{expense.method}</td>
+                    <td className="text-center">{expense.value}</td>
+                    <td className="text-center">{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
+                    <td className="text-center">
                       {
                         Number(expense.exchangeRates[expense.currency].ask).toFixed(2)
                       }
                     </td>
-                    <td>
+                    <td className="text-center">
                       {
                         (Number(expense.exchangeRates[expense.currency].ask)
-                          * Number(expense.value).toFixed(2))
+                          * Number(expense.value).toFixed(1))
                       }
                     </td>
-                    <td>Real</td>
-                    <td>
+                    <td className="text-center">Real</td>
+                    <div className="border-2 ml-2 bg-red-300">
                       <button
+                        className="p-2"
                         data-testid="delete-btn"
                         type="button"
                         onClick={ () => this.removeExpenseFromTable(expense.id) }
                       >
                         Deletar despesa
                       </button>
-                    </td>
+                    </div>
                   </tr>
                 ))
               )

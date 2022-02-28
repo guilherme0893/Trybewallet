@@ -62,9 +62,9 @@ class ExpensesForm extends Component {
       .filter((currencyControl) => currencyControl !== coinControl);
 
     return (
-      <div className="flex justify-center items-center">
-        <form>
-          <label htmlFor="value">
+      <div className="flex justify-center items-center mt-2">
+        <form className="border-4 p-1 border-green-800 ">
+          <label className="mr-2" htmlFor="value">
             Valor:
             <input
               data-testid="value-input"
@@ -75,7 +75,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label htmlFor="description">
+          <label className="mr-2" htmlFor="description">
             Descrição:
             <input
               data-testid="description-input"
@@ -85,8 +85,7 @@ class ExpensesForm extends Component {
               onChange={ this.handleOnInputChange }
             />
           </label>
-          <label htmlFor="currency">
-            Moeda:
+          <label className="mr-2" htmlFor="currency">
             <select
               data-testid="currency-input"
               name="currency"
@@ -104,21 +103,22 @@ class ExpensesForm extends Component {
                     { currencyForExchange }
                   </option>
                 ))}
+              <option value="">Selecione a moeda</option>
             </select>
           </label>
           <select
+            className="mr-2"
             data-testid="method-input"
             name="method"
             onChange={ this.handleOnInputChange }
             value={ method }
           >
-            <option value="defaultSelect" disabled hidden>Método de pagamento</option>
+            <option value="">Selecione pagamento </option>
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
             <option value="Cartão de débito">Cartão de débito</option>
           </select>
-          <label htmlFor="tag">
-            Tag:
+          <label className="mr-2" htmlFor="tag">
             <select
               data-testid="tag-input"
               name="tag"
@@ -126,6 +126,7 @@ class ExpensesForm extends Component {
               value={ tag }
               onChange={ this.handleOnInputChange }
             >
+              <option value="">Selecione a tag</option>
               <option value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
               <option value="Trabalho">Trabalho</option>
@@ -135,6 +136,7 @@ class ExpensesForm extends Component {
           </label>
         </form>
         <button
+          className="border-4 p-1 border-green-800 bg-green-900 text-white"
           type="button"
           onClick={ this.handleAddValue }
         >

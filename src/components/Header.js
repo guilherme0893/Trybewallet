@@ -28,10 +28,12 @@ class Header extends Component {
     const { email } = this.props;
     const { defaultCurrency } = this.state;
     return (
-      <header className="flex justify-center items-center mt-2 p-3">
-        <h3 data-testid="email-field">
-          { email }
-        </h3>
+      <header className="text-2xl flex justify-center items-center mt-2 p-3">
+        <div>
+          <h3 data-testid="email-field">
+            { email }
+          </h3>
+        </div>
         <h3 data-testid="total-field">
           {`Despesa total: ${this.getTotalValue()}`}
         </h3>

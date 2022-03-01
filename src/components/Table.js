@@ -18,10 +18,13 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div className="mt-5 flex justify-center items-center">
+      <div className="mt-5 mb-4 flex justify-center items-center">
         <table className="table-fixed">
           <thead>
-            <tr>
+            <tr
+              className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black">
               <th
                 className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
                  whitespace-nowrap font-bold text-left bg-green-800
@@ -48,7 +51,14 @@ class Table extends Component {
                  whitespace-nowrap font-bold text-left bg-green-800
                  text-white border-black"
               >
-                Moeda
+                Valor
+              </th>
+              <th
+                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                 whitespace-nowrap font-bold text-left bg-green-800
+                 text-white border-black"
+              >
+                Moeda de conversão
               </th>
               <th
                 className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
@@ -65,18 +75,11 @@ class Table extends Component {
                 Valor convertido
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
+                className="px-6 text-center align-middle border-2 border-solid py-3 text-xs uppercase
                  whitespace-nowrap font-bold text-left bg-green-800
                  text-white border-black"
               >
-                Moeda de conversão
-              </th>
-              <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
-                 text-white border-black"
-              >
-                Editar/Excluir
+                Excluir
               </th>
             </tr>
           </thead>
@@ -85,35 +88,35 @@ class Table extends Component {
               expenses !== [] && (
                 expenses.map((expense) => (
                   <tr key={ expense.id }>
-                    <td className="text-center">
+                    <td className="text-center border-2 border-solid border-black">
                       {expense.tag}
                     </td>
-                    <td className="text-center">{expense.description}</td>
-                    <td className="text-center">{expense.method}</td>
-                    <td className="text-center">{expense.value}</td>
-                    <td className="text-center">{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
-                    <td className="text-center">
+                    <td className="text-center border-2 border-solid border-black">{expense.description}</td>
+                    <td className="text-center border-2 border-solid border-black">{expense.method}</td>
+                    <td className="text-center border-2 border-solid border-black">{expense.value}</td>
+                    <td className="text-center border-2 border-solid border-black">{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
+                    <td className="text-center border-2 border-solid border-black">
                       {
                         Number(expense.exchangeRates[expense.currency].ask).toFixed(2)
                       }
                     </td>
-                    <td className="text-center">
+                    <td className="text-center border-2 border-solid border-black">
                       {
                         (Number(expense.exchangeRates[expense.currency].ask)
                           * Number(expense.value).toFixed(1))
                       }
                     </td>
-                    <td className="text-center">Real</td>
-                    <div className="border-2 ml-2 bg-red-300">
+                    {/* <td className="text-center border-2 border-solid border-black">Real</td> */}
+                    <td className="border-2 ml-2 bg-red-300 text-center border-2 border-solid border-black">
                       <button
                         className="p-2"
                         data-testid="delete-btn"
                         type="button"
                         onClick={ () => this.removeExpenseFromTable(expense.id) }
                       >
-                        Deletar despesa
+                        Excluir despesa
                       </button>
-                    </div>
+                    </td>
                   </tr>
                 ))
               )

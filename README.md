@@ -7,4 +7,8 @@ In overall here it was performed:
 * Create Redux actions in React applications
 * Create Redux dispatchers in React applications
 * Connect Redux to React components
-* Create asynchronous actions in your React application that makes use of Redux. 
+* Create asynchronous actions in your React application that makes use of Redux.
+
+# Take a look at the application (still under development)
+
+https://dreamy-borg-22c82e.netlify.app/

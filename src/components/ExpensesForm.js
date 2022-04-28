@@ -63,12 +63,14 @@ class ExpensesForm extends Component {
 
     return (
       <div className="flex justify-center items-center mt-2">
-        <form className="border-4 p-1 border-green-800 ">
+        <form className="border-4 pr-3 pl-3 pt-2 pb-2 border-green-800 bg-gray-300">
           <label className="mr-2" htmlFor="value">
-            Valor:
+            Value
             <input
+              className="ml-4 text-center bg-gray-200 border-b-4 focus:outline-none
+                focus:border-purple-600 transition duration-500"
               data-testid="value-input"
-              type="number"
+              // type="number"
               name="value"
               id="value"
               value={ value }
@@ -76,8 +78,10 @@ class ExpensesForm extends Component {
             />
           </label>
           <label className="mr-2" htmlFor="description">
-            Descrição:
+            Description
             <input
+              className="ml-4 text-center bg-gray-200 focus:outline-none
+                border-b-4 focus:border-purple-600 transition duration-500"
               data-testid="description-input"
               type="text"
               name="description"
@@ -87,6 +91,8 @@ class ExpensesForm extends Component {
           </label>
           <label className="mr-2" htmlFor="currency">
             <select
+              className="ml-4 text-center bg-gray-200 focus:outline-none
+                border-b-4 focus:border-purple-600 transition duration-500"
               data-testid="currency-input"
               name="currency"
               id="currency"
@@ -103,45 +109,70 @@ class ExpensesForm extends Component {
                     { currencyForExchange }
                   </option>
                 ))}
-              <option value="">Selecione a moeda</option>
+              {/* <option value="">Selecione a moeda</option> */}
             </select>
           </label>
           <select
-            className="mr-2"
+            className="ml-4 text-center bg-gray-200 focus:outline-none
+              border-b-4 focus:border-purple-600 transition duration-500"
             data-testid="method-input"
             name="method"
             onChange={ this.handleOnInputChange }
             value={ method }
           >
-            <option value="">Selecione pagamento </option>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
+            <option
+              value=""
+              selected
+              disabled
+              hidden
+              className="bg-gray-200"
+            >
+              Choose payment method
+            </option>
+            <option value="Dinheiro" className="bg-gray-200">Dinheiro</option>
+            <option value="Cartão de crédito" className="bg-gray-200">
+              Credit
+            </option>
+            <option value="Cartão de débito" className="bg-gray-200">
+              Debit
+            </option>
           </select>
-          <label className="mr-2" htmlFor="tag">
+          <label className="mr-2 bg-gray-200" htmlFor="tag">
             <select
+              className="ml-4 text-center bg-gray-200 focus:outline-none
+                border-b-4 focus:border-purple-600 transition duration-500"
               data-testid="tag-input"
               name="tag"
               id="tag"
               value={ tag }
               onChange={ this.handleOnInputChange }
             >
-              <option value="">Selecione a tag</option>
-              <option value="Alimentação">Alimentação</option>
-              <option value="Lazer">Lazer</option>
-              <option value="Trabalho">Trabalho</option>
-              <option value="Transporte">Transporte</option>
-              <option value="Saúde">Saúde</option>
+              <option
+                value=""
+                selected
+                disabled
+                hidden
+                className="bg-gray-200"
+              >
+                Choose the tag
+              </option>
+              <option value="Alimentação" className="bg-gray-200">Food</option>
+              <option value="Lazer" className="bg-gray-200">Leisure</option>
+              <option value="Trabalho" className="bg-gray-200">Work</option>
+              <option value="Transporte" className="bg-gray-200">Transport</option>
+              <option value="Saúde" className="bg-gray-200">Health</option>
             </select>
           </label>
+          <button
+            className="ml-2 bg-white hover:bg-purple-400 hover:text-white
+              text-dark font-bold py-2 px-4 border border-purple-300
+                rounded transtion duration-500"
+            type="button"
+            onClick={ this.handleAddValue }
+          >
+            Add expense
+          </button>
         </form>
-        <button
-          className="border-4 p-1 border-green-800 bg-green-900 text-white"
-          type="button"
-          onClick={ this.handleAddValue }
-        >
-          Adicionar despesa
-        </button>
       </div>
     );
   }

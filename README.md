@@ -11,6 +11,16 @@ This projects is focused on creating an expense-controlling table, in short word
 * Connect Redux to React components
 * Create asynchronous actions in your React application that makes use of Redux.
 
+# How to use it 
+   
+1) First of all clone the repository via <code> git clone </code>  and enter into the folder 
+
+2) Then install the dependencies via <code> npm install </code>
+
+3) To run the application simply run <code> npm start </code>
+
+4) Have fun
+
 # Take a look at the application
 
 https://dreamy-borg-22c82e.netlify.app/

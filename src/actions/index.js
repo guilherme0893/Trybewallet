@@ -6,6 +6,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const GET_CURRENCIES_SUCCESS = 'GET_CURRENCIES_SUCESS';
 export const GET_CURRENCIES_FAIL = 'GET_CURRENCIES_FAIL';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export const addUserAct = (email) => ({
   type: ADD_USER,
@@ -33,6 +34,12 @@ const getCurrenciesFail = () => ({
 export const removeExpense = (payload) => ({
   type: REMOVE_EXPENSE,
   payload,
+});
+
+export const editExpense = (id, expense) => ({
+  type: EDIT_EXPENSE,
+  id,
+  expense,
 });
 
 export const getCurrencyThunk = () => (dispatch) => {

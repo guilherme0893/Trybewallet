@@ -27,6 +27,6 @@ https://dreamy-borg-22c82e.netlify.app/
 
 # Future updates
 
-- Adapt a responsive layout
+- Adapt a responsive layout of the main table
 
 - Add the update button in the wallet page

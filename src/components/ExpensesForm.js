@@ -62,7 +62,13 @@ class ExpensesForm extends Component {
       .filter((currencyControl) => currencyControl !== coinControl);
 
     return (
-      <div className="flex justify-center items-center mt-2">
+      <div
+        className="flex justify-center items-center mt-2"
+        style={ {
+          backgroundColor: '#9921e8',
+          backgroundImage: 'linear-gradient(315deg, #cc99cc, #999999 75%)',
+        } }
+      >
         <form className="border-4 pr-3 pl-3 pt-2 pb-2 border-green-800 bg-gray-300">
           <label className="mr-2" htmlFor="value">
             Value

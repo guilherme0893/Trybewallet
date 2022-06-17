@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -55,80 +56,80 @@ class Login extends React.Component {
 
     if (isUserLogged) return <Redirect to="/carteira" />;
 
-    /* <header className=" text-2xl flex justify-center items-center mb-3">
-    <h1 className="font-mono text-6xl mb-5">TrybeWallet</h1>
-    </header> */
-
     return (
       <main
-        style={ { backgroundColor: 'RGB(255,255,255)' } }
-        className="shadow-2xl m-auto mt-40 max-w-lg rounded-lg flex flex-col
-          justify-center h-3/6 border-4 border-purple-200"
+        className="shadow-2xl h-screen flex-col flex items-center justify-center"
+        style={ {
+          backgroundColor: '#9921e8',
+          backgroundImage: 'linear-gradient(315deg, #cc99cc, #999999 75%',
+        } }
       >
-        <section className="flex items-center justify-center">
-          <h3 className="font-bold text-2xl mb-5">Welcome to TrybeWallet</h3>
-        </section>
-        <section className="flex items-center justify-center">
-          <form className="flex flex-col items-center mb-6 pt-3 rounded bg-gray-200">
-            {/* <div className="mb-6 pt-3 rounded bg-gray-200"> */}
-            <label
-              htmlFor="email"
-              className="block font-bold text-sm mb-2 ml-3 text-gray-700"
-            >
-              <FaUser />
-              {/* <div className="flex flex-row pb-1">
-              </div> */}
-              <input
-                className="ml-3 mr-3 py-2 px-3 bg-gray-200 border shadow-sm
+        <div className="border-4 border-purple-200 pt-10 p-10 w-1/8">
+          <section className="flex items-center justify-center">
+            <h3 className="font-bold text-2xl mb-5">Welcome to TrybeWallet</h3>
+          </section>
+          <section className="flex items-center justify-center">
+            <form className="flex flex-col items-center mb-6 pt-3 rounded bg-gray-200">
+              {/* <div className="mb-6 pt-3 rounded bg-gray-200"> */}
+              <label
+                htmlFor="email"
+                className="block font-bold text-sm mb-2 ml-3 text-gray-700"
+              >
+                <FaUser />
+                {/* <div className="flex flex-row pb-1">
+                </div> */}
+                <input
+                  className="ml-3 mr-3 py-2 px-3 bg-gray-200 border shadow-sm
+                      focus:outline-none text-gray-700 block rounded-md font-mono
+                        border-b-4 border-gray-200 focus:border-purple-600
+                          transition duration-500"
+                  data-testid="email-input"
+                  placeholder="user email"
+                  type="text"
+                  name="email"
+                  id="email"
+                  value={ email }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+              {/* </div> */}
+              {/* <div className="mb-6 pt-3 rounded bg-gray-200"> */}
+              <label
+                htmlFor="password"
+                className="block font-bold text-sm mb-2 ml-3 text-gray-700"
+              >
+                <div className="flex flex-row pb-1">
+                  Password
+                </div>
+                <input
+                  className="ml-3 mr-3 py-2 px-3 bg-gray-200 border shadow-sm
                     focus:outline-none text-gray-700 block rounded-md font-mono
                       border-b-4 border-gray-200 focus:border-purple-600
                         transition duration-500"
-                data-testid="email-input"
-                placeholder="user email"
-                type="text"
-                name="email"
-                id="email"
-                value={ email }
-                onChange={ this.onInputChange }
-              />
-            </label>
-            {/* </div> */}
-            {/* <div className="mb-6 pt-3 rounded bg-gray-200"> */}
-            <label
-              htmlFor="password"
-              className="block font-bold text-sm mb-2 ml-3 text-gray-700"
+                  data-testid="password-input"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={ password }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+            </form>
+          </section>
+          <div className="flex justify-center">
+            <button
+              className="mt-4 bg-white hover:bg-purple-700 hover:text-white
+                text-dark font-bold py-2 px-4 border border-purple-300
+                  rounded transtion duration-500"
+              type="submit"
+              onClick={ this.onLoginButtonClick }
+              disabled={ isButtonDisabled }
             >
-              <div className="flex flex-row pb-1">
-                Password
-              </div>
-              <input
-                className="ml-3 mr-3 py-2 px-3 bg-gray-200 border shadow-sm
-                  focus:outline-none text-gray-700 block rounded-md font-mono
-                    border-b-4 border-gray-200 focus:border-purple-600
-                      transition duration-500"
-                data-testid="password-input"
-                type="password"
-                name="password"
-                id="password"
-                value={ password }
-                onChange={ this.onInputChange }
-              />
-            </label>
-            {/* </div> */}
-          </form>
-        </section>
-        <div className="flex justify-center">
-          <button
-            className="mt-4 bg-white hover:bg-purple-700 hover:text-white
-              text-dark font-bold py-2 px-4 border border-purple-300
-                rounded transtion duration-500"
-            type="submit"
-            onClick={ this.onLoginButtonClick }
-            disabled={ isButtonDisabled }
-          >
-            Entrar
-          </button>
+              Entrar
+            </button>
+          </div>
         </div>
+
       </main>
     );
   }

@@ -23,6 +23,16 @@ class Table extends Component {
       <div className="mt-5 mb-4 flex justify-center items-center pb-80 md:max-w-2xl">
         <table className="table-fixed hover:table-fixed md:max-w-2xl">
           <thead className="md:max-w-2xl">
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir </th>
+            </tr>
             <tr
               className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
                  whitespace-nowrap font-bold text-left bg-green-800
@@ -91,6 +101,11 @@ class Table extends Component {
               expenses !== [] && (
                 expenses.map((expense) => (
                   <tr key={ expense.id }>
+                    <td>{expense.tag}</td>
+                    <td>{expense.description}</td>
+                    <td>{expense.method}</td>
+                    <td>{expense.value}</td>
+                    <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
                       className="text-center border-2 border-solid

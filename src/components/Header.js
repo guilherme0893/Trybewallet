@@ -28,23 +28,34 @@ class Header extends Component {
     const { email } = this.props;
     const { defaultCurrency } = this.state;
     return (
-      <header className="text-2xl flex flex-col justify-center items-center mt-2 p-3">
+      <nav
+        className="bg-gray-200 border-b-4 flex justify-around
+         items-center m-auto p-3"
+      >
         <div>
-          <h3 data-testid="email-field">
+          <h1
+            className="border-b-4 text-4xl text-center m-auto max-w-lg font-bold mt-3
+              hover:outline-none hover:border-purple-600 transition duration-500"
+          >
+            Trybewallet
+          </h1>
+        </div>
+        <div className="text-3xl">
+          <h1 data-testid="email-field">
             Welcome
             {' '}
             {
               email
             }
-          </h3>
+          </h1>
         </div>
-        <div>
-          <h3 data-testid="total-field">
+        <div className="text-2xl">
+          <h1 data-testid="total-field">
             {`Your total expense is ${this.getTotalValue()}`}
             { defaultCurrency }
-          </h3>
+          </h1>
         </div>
-      </header>
+      </nav>
     );
   }
 }

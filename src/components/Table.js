@@ -20,6 +20,18 @@ class Table extends Component {
     const { expenses } = this.props;
     const backGroundColor = 'rgb(212 212 216)';
     return (
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir </th>
       <div className="mt-5 mb-4 flex justify-center items-center">
         <table className="table-fixed">
           <thead className="">
@@ -91,6 +103,12 @@ class Table extends Component {
               expenses !== [] && (
                 expenses.map((expense) => (
                   <tr key={ expense.id }>
+                    <td>{expense.tag}</td>
+                    <td>{expense.description}</td>
+                    <td>{expense.method}</td>
+                    <td>{expense.value}</td>
+                    <td>{expense.exchangeRates[expense.currency].name.split('/', 1)}</td>
+                    <td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
                       className="text-center border-2 border-solid

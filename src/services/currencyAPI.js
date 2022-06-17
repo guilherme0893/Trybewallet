@@ -1,5 +1,3 @@
-// com base no course
-
 const url = 'https://economia.awesomeapi.com.br/json/all';
 
 const getCurrencies = () => fetch(url)

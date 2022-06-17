@@ -76,7 +76,6 @@ class ExpensesForm extends Component {
               className="ml-4 text-center bg-gray-200 border-b-4 focus:outline-none
                 focus:border-purple-600 transition duration-500"
               data-testid="value-input"
-              // type="number"
               name="value"
               id="value"
               value={ value }
@@ -115,7 +114,6 @@ class ExpensesForm extends Component {
                     { currencyForExchange }
                   </option>
                 ))}
-              {/* <option value="">Selecione a moeda</option> */}
             </select>
           </label>
           <select
@@ -135,7 +133,7 @@ class ExpensesForm extends Component {
             >
               Choose payment method
             </option>
-            <option value="Dinheiro" className="bg-gray-200">Dinheiro</option>
+            <option value="Dinheiro" className="bg-gray-200">Money</option>
             <option value="Cartão de crédito" className="bg-gray-200">
               Credit
             </option>

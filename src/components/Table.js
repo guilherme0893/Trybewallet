@@ -20,9 +20,9 @@ class Table extends Component {
     const { expenses } = this.props;
     const backGroundColor = 'rgb(212 212 216)';
     return (
-      <div className="mt-5 mb-4 flex justify-center items-center">
-        <table className="table-fixed">
-          <thead className="">
+      <div className="mt-5 mb-4 flex justify-center items-center pb-80 md:max-w-2xl">
+        <table className="table-fixed hover:table-fixed md:max-w-2xl">
+          <thead className="md:max-w-2xl">
             <tr
               className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
                  whitespace-nowrap font-bold text-left bg-green-800
@@ -78,7 +78,7 @@ class Table extends Component {
                 Valor convertido
               </th>
               <th
-                className="px-6 text-center align-middle border-2 border-solid py-3
+                className="px-6 align-middle border-2 border-solid py-3
                   text-xs uppercase whitespace-nowrap font-bold text-left
                     bg-green-800 text-white border-white"
               >
@@ -149,7 +149,7 @@ class Table extends Component {
                       border-white bg-slate-200">Real</td> */}
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="border-2 ml-2 text-center border-2
+                      className="border-2 ml-2 text-center
                         border-solid border-stone bg-white"
                     >
                       <button

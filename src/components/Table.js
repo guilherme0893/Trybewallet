@@ -20,69 +20,69 @@ class Table extends Component {
     const { expenses } = this.props;
     const backGroundColor = 'rgb(212 212 216)';
     return (
-      <div className="mt-5 mb-4 flex justify-center items-center pb-80 md:max-w-2xl">
-        <table className="table-fixed hover:table-fixed md:max-w-2xl">
-          <thead className="md:max-w-2xl">
+      <nav className="mt-3 flex justify-center items-center mx-4 mb-4">
+        <table className="table-fixed hover:table-fixed w-full">
+          <thead className="">
             <tr
               className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                 whitespace-nowrap font-bold text-center bg-green-800
                  text-white border-black"
             >
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
-                 text-white border-white"
+                className="px-6 align-middle border-2 border-solid py-3
+                 whitespace-nowrap font-bold bg-green-800
+                 text-white border-white text-sm"
               >
-                Descrição
+                Description
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
                 Tag
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
-                Método de pagamento
+                Payment method
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
-                Valor
+                Value
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
-                Moeda de conversão
+                Currency
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
-                Câmbio utilizado
+                Exchange rate
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-left bg-green-800
+                className="px-6 align-middle border-2 border-solid py-3 text-sm
+                 whitespace-nowrap font-bold bg-green-800
                  text-white border-white"
               >
-                Valor convertido
+                Converted value
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3
-                  text-xs uppercase whitespace-nowrap font-bold text-left
+                className="px-6 align-middle border-2 border-solid
+                  text-sm whitespace-nowrap font-bold
                     bg-green-800 text-white border-white"
               >
-                Excluir
+                Delete
               </th>
             </tr>
           </thead>
@@ -165,7 +165,7 @@ class Table extends Component {
             }
           </tbody>
         </table>
-      </div>
+      </nav>
     );
   }
 }

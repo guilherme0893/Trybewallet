@@ -1,6 +1,6 @@
 # Introduction
 
-This projects is focused on creating an expense-controlling table, in short words a kind of wallet. Here, React JS was the main tool used for creating the interface, and Redux was used for handling the application states. For the styles and CSS, TailWind CSS framework was chosen, along with some inline styling.
+This projects is focused on creating an expense-controlling table, in short words a kind of wallet. Here, React JS was the main tool used for creating the interface, and Redux was used for handling the application states. For the styles and CSS, TailWind CSS framework was chosen, along with some inline styling. Currencies and exchange rates are provided by Awesome API (https://economia.awesomeapi.com.br/json/all)
 
 # Major features
    
@@ -13,11 +13,11 @@ This projects is focused on creating an expense-controlling table, in short word
 
 # How to use it 
    
-1) First of all clone the repository via <code> git clone </code>  and enter into the folder 
+1) First of all clone the repository via <code>git clone</code> and enter into the folder 
 
-2) Then install the dependencies via <code> npm install </code>
+2) Then install the dependencies via <code>npm install</code>
 
-3) To run the application simply run <code> npm start </code>
+3) To run the application simply run <code>npm start</code>
 
 4) Have fun
 
@@ -26,7 +26,5 @@ This projects is focused on creating an expense-controlling table, in short word
 https://dreamy-borg-22c82e.netlify.app/
 
 # Future updates
-
-- Adapt a responsive layout of the main table
 
 - Add the update button in the wallet page

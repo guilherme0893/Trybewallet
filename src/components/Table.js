@@ -20,67 +20,55 @@ class Table extends Component {
     const { expenses } = this.props;
     const backGroundColor = 'rgb(212 212 216)';
     return (
-      <nav className="mt-3 flex justify-center items-center mx-4 mb-4">
-        <table className="table-fixed hover:table-fixed w-full">
-          <thead className="">
-            <tr
-              className="px-6 align-middle border-2 border-solid py-3 text-xs uppercase
-                 whitespace-nowrap font-bold text-center bg-green-800
-                 text-white border-black"
-            >
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-3">
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 text-center">
+            <tr>
               <th
-                className="px-6 align-middle border-2 border-solid py-3
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white text-sm"
+                scope="col"
+                className="px-6 py-3 text-center"
               >
                 Description
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Tag
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Payment method
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Value
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Currency
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Exchange rate
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid py-3 text-sm
-                 whitespace-nowrap font-bold bg-green-800
-                 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Converted value
               </th>
               <th
-                className="px-6 align-middle border-2 border-solid
-                  text-sm whitespace-nowrap font-bold
-                    bg-green-800 text-white border-white"
+                scope="col"
+                className="px-6 py-3"
               >
                 Delete
               </th>
@@ -90,46 +78,43 @@ class Table extends Component {
             {
               expenses !== [] && (
                 expenses.map((expense) => (
-                  <tr key={ expense.id }>
+                  <tr
+                    key={ expense.id }
+                    className="bg-white border-b hover:bg-gray-50"
+                  >
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 text-dark font-bold"
                     >
                       {expense.tag}
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {expense.description}
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {expense.method}
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {expense.value}
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {expense.exchangeRates[expense.currency].name.split('/', 1)}
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {
                         Number(expense.exchangeRates[expense.currency].ask).toFixed(2)
@@ -137,8 +122,7 @@ class Table extends Component {
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="text-center border-2 border-solid
-                        border-stone bg-stone-300"
+                      className="text-center px-6 py-4 font-bold"
                     >
                       {
                         (Number(expense.exchangeRates[expense.currency].ask)
@@ -147,8 +131,7 @@ class Table extends Component {
                     </td>
                     <td
                       style={ { backgroundColor: backGroundColor } }
-                      className="border-2 ml-2 text-center
-                        border-solid border-stone bg-white"
+                      className="text-center px-6 py-4"
                     >
                       <button
                         className="p-2"
@@ -165,7 +148,7 @@ class Table extends Component {
             }
           </tbody>
         </table>
-      </nav>
+      </div>
     );
   }
 }

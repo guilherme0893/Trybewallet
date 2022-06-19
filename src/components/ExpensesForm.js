@@ -63,69 +63,99 @@ class ExpensesForm extends Component {
       .filter((currencyControl) => currencyControl !== coinControl);
 
     return (
-      <nav className="items-center">
-        <form
-          className="border-4 pr-3 pl-3
-            pt-2 pb-2 border-green-800 bg-gray-300 hover:outline-none
-             hover:border-purple-600 transition duration-500"
+      <form
+        className="flex flex-col items-center border-4
+          border-green-800 bg-gray-300 hover:outline-none
+          hover:border-purple-600 transition duration-500"
+      >
+        <div
+          className="flex flex-col items-center md:w-full
+            lg:flex lg:flex-row lg:justify-around lg:p-2"
         >
-          <div
-            className="flex justify-around items-center lg:flex-row sm:flex-col"
-          >
-            <label className="flex mr-2" htmlFor="value">
-              Value
-              <input
-                className="ml-4 text-center bg-gray-200 border-b-4 focus:outline-none
-                  focus:border-purple-600 transition duration-500"
-                data-testid="value-input"
-                name="value"
-                id="value"
-                value={ value }
-                onChange={ this.handleOnInputChange }
-              />
-            </label>
-            <label className="flex mr-2" htmlFor="description">
-              Description
-              <input
-                className="ml-4 text-center bg-gray-200 focus:outline-none
-                  border-b-4 focus:border-purple-600 transition duration-500"
-                data-testid="description-input"
-                type="text"
-                name="description"
-                value={ description }
-                onChange={ this.handleOnInputChange }
-              />
-            </label>
-            <label className="flex mr-2" htmlFor="currency">
-              <select
-                className="ml-4 text-center bg-gray-200 focus:outline-none
-                  border-b-4 focus:border-purple-600 transition duration-500"
-                data-testid="currency-input"
-                name="currency"
-                id="currency"
-                value={ currency }
-                onChange={ this.handleOnInputChange }
-              >
-                {currenciesForExchange.length > 0
-                  && currenciesForExchange.map((currencyForExchange) => (
-                    <option
-                      data-testid={ currencyForExchange }
-                      key={ currencyForExchange }
-                      value={ currencyForExchange }
-                    >
-                      { currencyForExchange }
-                    </option>
-                  ))}
-              </select>
-            </label>
-            <select
-              className="p-1 flex ml-4 text-center bg-gray-200
-                focus:outline-none border-b-4 focus:border-purple-600
-                  transition duration-500"
-              data-testid="method-input"
-              name="method"
+          <label className="flex my-2" htmlFor="value">
+            Value
+            <input
+              className="text-center bg-gray-200 border-b-4 focus:outline-none
+                focus:border-purple-600 transition duration-500 w-40 ml-1"
+              data-testid="value-input"
+              name="value"
+              id="value"
+              value={ value }
               onChange={ this.handleOnInputChange }
-              value={ method }
+            />
+          </label>
+          <label className="flex my-2" htmlFor="description">
+            Description
+            <input
+              className="text-center bg-gray-200 focus:outline-none w-40 ml-1
+                border-b-4 focus:border-purple-600 transition duration-500"
+              data-testid="description-input"
+              type="text"
+              name="description"
+              value={ description }
+              onChange={ this.handleOnInputChange }
+            />
+          </label>
+          <label className="flex my-2" htmlFor="currency">
+            <select
+              className="text-center bg-gray-200 focus:outline-none
+                border-b-4 focus:border-purple-600 transition duration-500"
+              data-testid="currency-input"
+              name="currency"
+              id="currency"
+              value={ currency }
+              onChange={ this.handleOnInputChange }
+            >
+              {currenciesForExchange.length > 0
+                && currenciesForExchange.map((currencyForExchange) => (
+                  <option
+                    data-testid={ currencyForExchange }
+                    key={ currencyForExchange }
+                    value={ currencyForExchange }
+                  >
+                    { currencyForExchange }
+                  </option>
+                ))}
+            </select>
+          </label>
+          <select
+            className="flex my-2 text-center bg-gray-200 p-1
+              focus:outline-none border-b-4 focus:border-purple-600
+                transition duration-500"
+            data-testid="method-input"
+            name="method"
+            onChange={ this.handleOnInputChange }
+            value={ method }
+          >
+            <option
+              value=""
+              selected
+              disabled
+              hidden
+              className="bg-gray-200"
+            >
+              Choose payment method
+            </option>
+            <option value="Money" className="bg-gray-200">Money</option>
+            <option value="Credit" className="bg-gray-200">
+              Credit
+            </option>
+            <option value="Debit" className="bg-gray-200">
+              Debit
+            </option>
+          </select>
+          <label
+            className="bg-gray-200 my-2"
+            htmlFor="tag"
+          >
+            <select
+              className="text-center bg-gray-200 focus:outline-none p-1
+                border-b-4 focus:border-purple-600 transition duration-500"
+              data-testid="tag-input"
+              name="tag"
+              id="tag"
+              value={ tag }
+              onChange={ this.handleOnInputChange }
             >
               <option
                 value=""
@@ -134,57 +164,26 @@ class ExpensesForm extends Component {
                 hidden
                 className="bg-gray-200"
               >
-                Choose payment method
+                Choose the tag
               </option>
-              <option value="Money" className="bg-gray-200">Money</option>
-              <option value="Credit" className="bg-gray-200">
-                Credit
-              </option>
-              <option value="Debit" className="bg-gray-200">
-                Debit
-              </option>
+              <option value="Alimentação" className="bg-gray-200">Food</option>
+              <option value="Lazer" className="bg-gray-200">Leisure</option>
+              <option value="Trabalho" className="bg-gray-200">Work</option>
+              <option value="Transporte" className="bg-gray-200">Transport</option>
+              <option value="Saúde" className="bg-gray-200">Health</option>
             </select>
-            <label
-              className="flex mr-2 bg-gray-200"
-              htmlFor="tag"
-            >
-              <select
-                className="p-1 text-center bg-gray-200 focus:outline-none
-                  border-b-4 focus:border-purple-600 transition duration-500"
-                data-testid="tag-input"
-                name="tag"
-                id="tag"
-                value={ tag }
-                onChange={ this.handleOnInputChange }
-              >
-                <option
-                  value=""
-                  selected
-                  disabled
-                  hidden
-                  className="bg-gray-200"
-                >
-                  Choose the tag
-                </option>
-                <option value="Alimentação" className="bg-gray-200">Food</option>
-                <option value="Lazer" className="bg-gray-200">Leisure</option>
-                <option value="Trabalho" className="bg-gray-200">Work</option>
-                <option value="Transporte" className="bg-gray-200">Transport</option>
-                <option value="Saúde" className="bg-gray-200">Health</option>
-              </select>
-            </label>
-            <button
-              className="ml-2 bg-white hover:bg-purple-400 hover:text-white
-                text-dark font-bold py-2 px-4 border border-purple-300
-                  rounded transtion duration-500"
-              type="button"
-              onClick={ this.handleAddValue }
-            >
-              Add expense
-            </button>
-          </div>
-        </form>
-      </nav>
+          </label>
+          <button
+            className="bg-white hover:bg-purple-400 hover:text-white
+              text-dark font-bold p-2 border border-purple-300 my-2
+                rounded transtion duration-500"
+            type="button"
+            onClick={ this.handleAddValue }
+          >
+            Add expense
+          </button>
+        </div>
+      </form>
     );
   }
 }

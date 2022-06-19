@@ -29,32 +29,28 @@ class Header extends Component {
     const { defaultCurrency } = this.state;
     return (
       <nav
-        className="bg-gray-200 border-b-4 flex justify-around
-         items-center m-auto p-3"
+        className="bg-gray-200 border-b-4 m-auto p-3
+          flex flex-col text-center
+            lg:flex md:flex lg:flex-row
+              md:flex-row justify-around"
       >
-        <div>
-          <h1
-            className="border-b-4 text-4xl text-center m-auto max-w-lg font-bold mt-3
-              hover:outline-none hover:border-purple-600 transition duration-500"
-          >
-            Trybewallet
-          </h1>
-        </div>
-        <div className="text-3xl">
-          <h1 data-testid="email-field">
-            Welcome
-            {' '}
-            {
-              email
-            }
-          </h1>
-        </div>
-        <div className="text-2xl">
-          <h1 data-testid="total-field">
-            {`Your total expense is ${this.getTotalValue()}`}
-            { defaultCurrency }
-          </h1>
-        </div>
+        <h1
+          className="border-b-4 text-2xl lg:text-4xl font-bold mt-3
+            hover:outline-none hover:border-purple-600 transition duration-500"
+        >
+          Trybewallet
+        </h1>
+        <p data-testid="email-field" className="mt-3 lg:text-3xl text-lg">
+          Welcome
+          {' '}
+          {
+            email
+          }
+        </p>
+        <p data-testid="total-field" className="text-xl lg:text-2xl mt-3">
+          {`Your total expense is ${this.getTotalValue()}`}
+          { defaultCurrency }
+        </p>
       </nav>
     );
   }
